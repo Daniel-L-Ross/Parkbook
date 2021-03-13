@@ -2,14 +2,14 @@
 name: User Story
 about: Enter a user story for BDD
 title: ''
-labels: ''
+labels: enhancement
 assignees: Daniel-L-Ross
 
 ---
 
 # Story
 
-As a user...
+As a user, 
 
 # Acceptance Criteria
 

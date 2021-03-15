@@ -1,5 +1,8 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
+import { ParkList } from "./parks/ParkList"
+import { ParkProvider } from "./parks/ParkProvider"
+
 // appication views
 // navbar
 // login
@@ -11,7 +14,9 @@ export const Parkbook = () => {
         <>
             <h1>Welcome to parkbook. </h1>
             <section>
-                <h2> Here is a list of parks: </h2>
+                <ParkProvider>
+                    <ParkList />
+                </ParkProvider>
 
             </section>
         </>

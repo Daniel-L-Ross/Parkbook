@@ -10,6 +10,10 @@ export const Parkbook = () => {
     return (
         <>
             <h1>Welcome to parkbook. </h1>
+            <section>
+                <h2> Here is a list of parks: </h2>
+
+            </section>
         </>
     )
 }

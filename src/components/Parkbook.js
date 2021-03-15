@@ -17,7 +17,6 @@ export const Parkbook = () => {
                 <ParkProvider>
                     <ParkList />
                 </ParkProvider>
-
             </section>
         </>
     )

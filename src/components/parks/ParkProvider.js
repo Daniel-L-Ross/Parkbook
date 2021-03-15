@@ -13,7 +13,7 @@ export const ParkProvider = props => {
 
     return (
         <ParkContext.Provider value ={{
-            parks
+            getParks, parks
         }}>
             {props.children}
         </ParkContext.Provider>

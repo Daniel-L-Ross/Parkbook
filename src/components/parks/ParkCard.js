@@ -28,7 +28,7 @@ export const ParkCard = ({ park }) => {
     }
     
     return (
-        <div className={favorited ? "park park__favorite" : "park"}>
+        <div className={favorited ? "favorite" : "park"}>
             <h3 className="park__name">{park.park_name}</h3>
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>

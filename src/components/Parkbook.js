@@ -6,6 +6,7 @@ import { userStorageKey } from "./auth/authSettings"
 import { ParkList } from "./parks/ParkList"
 import { ParkProvider } from "./parks/ParkProvider"
 import { FavoriteProvider } from "./favorites/FavoritesProvider"
+import { FavoritesList } from "./favorites/FavoritesList"
 
 // appication views
 // navbar
@@ -14,9 +15,6 @@ import { FavoriteProvider } from "./favorites/FavoritesProvider"
 // import "./Parkbook.css"
 
 export const Parkbook = () => {
-
-
-
     return (
         <>
             <Route render={() => {
@@ -24,10 +22,11 @@ export const Parkbook = () => {
                     return (
                         <>
                             <h1>Welcome to parkbook. </h1>
-                            <section>
+                            <section >
                                 <ParkProvider>
                                     <FavoriteProvider>
-                                        <ParkList />
+                                        {/* <ParkList /> */}
+                                        <FavoritesList />
                                     </FavoriteProvider>
                                 </ParkProvider>
 

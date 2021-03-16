@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import { userStorageKey } from "./auth/authSettings"
+import { NavBar } from "./nav/NavBar"
 import { ParkList } from "./parks/ParkList"
 import { ParkProvider } from "./parks/ParkProvider"
 import { FavoriteProvider } from "./favorites/FavoritesProvider"
@@ -23,13 +24,13 @@ export const Parkbook = () => {
                         <>
                             <h1>Welcome to parkbook. </h1>
                             <section >
+                                <NavBar />
                                 <ParkProvider>
                                     <FavoriteProvider>
                                         <ParkList />
                                         <FavoritesList />
                                     </FavoriteProvider>
                                 </ParkProvider>
-
                             </section>
                         </>
                     )

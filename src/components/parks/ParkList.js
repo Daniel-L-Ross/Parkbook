@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import { ParkContext } from "./ParkProvider"
-import { ParkCard } from "./Park"
+import { ParkCard } from "./ParkCard"
 import "./Park.css"
 
 export const ParkList = () => {

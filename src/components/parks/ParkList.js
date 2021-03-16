@@ -1,13 +1,16 @@
 import React, { useContext, useEffect } from "react"
 import { ParkContext } from "./ParkProvider"
 import { ParkCard } from "./ParkCard"
+import { FavoriteContext } from "../favorites/FavoritesProvider"
 import "./Park.css"
 
 export const ParkList = () => {
 const { parks, getParks } = useContext(ParkContext)
+const { getUserFavorites } = useContext(FavoriteContext)
 
 useEffect(() => {
     getParks()
+    .then(getUserFavorites)
 }, [])
 
     return (

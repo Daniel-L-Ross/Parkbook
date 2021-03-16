@@ -10,3 +10,7 @@
     padding: 1em;
     border: 1px solid goldenrod;
 }
+
+.park__favorite {
+  border: 1px solid blueviolet
+}

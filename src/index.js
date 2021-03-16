@@ -5,7 +5,9 @@ import { Parkbook } from './components/Parkbook'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Parkbook />
+    <Router>
+      <Parkbook />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

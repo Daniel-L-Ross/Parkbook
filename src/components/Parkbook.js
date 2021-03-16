@@ -25,7 +25,7 @@ export const Parkbook = () => {
                             <section >
                                 <ParkProvider>
                                     <FavoriteProvider>
-                                        {/* <ParkList /> */}
+                                        <ParkList />
                                         <FavoritesList />
                                     </FavoriteProvider>
                                 </ParkProvider>

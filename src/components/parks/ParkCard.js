@@ -22,13 +22,13 @@ export const ParkCard = ({ park }) => {
     let favorited = false
 
     const favoriteCheck = userFavorites.find(favorite => favorite.parkId === park.id)
-    
+
     if (favoriteCheck !== undefined) {
         favorited = true
     }
     
     return (
-        <div className="park">
+        <div className={favorited ? "favorite" : "park"}>
             <h3 className="park__name">{park.park_name}</h3>
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>

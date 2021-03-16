@@ -5,6 +5,7 @@ import { Register } from "./auth/Register"
 import { userStorageKey } from "./auth/authSettings"
 import { ParkList } from "./parks/ParkList"
 import { ParkProvider } from "./parks/ParkProvider"
+import { FavoriteProvider } from "./favorites/FavoritesProvider"
 
 // appication views
 // navbar
@@ -25,7 +26,9 @@ export const Parkbook = () => {
                             <h1>Welcome to parkbook. </h1>
                             <section>
                                 <ParkProvider>
-                                    <ParkList />
+                                    <FavoriteProvider>
+                                        <ParkList />
+                                    </FavoriteProvider>
                                 </ParkProvider>
 
                             </section>

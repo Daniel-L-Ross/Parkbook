@@ -10,7 +10,7 @@ export const FavoriteProvider = (props) => {
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const getUserFavorites = () => {
-        return fetch(`http://localhost:8088/favorites/?userId=${currentUserId}`)
+        return fetch(`http://localhost:8088/favorites/?userId=${currentUserId}&_expand=park`)
             .then(res => res.json())
             .then(setUserFavorites)
     }

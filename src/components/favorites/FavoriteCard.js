@@ -2,14 +2,14 @@ import React, { useContext } from "react"
 import { FavoriteContext } from "./FavoritesProvider"
 
 export const FavoriteCard = ({park}) => {
-    const { getUserFavorites, addFavorite } = useContext(FavoriteContext)
+    const { getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
 
     const address = JSON.parse(park.mapped_location.human_address)
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const handleClickRemoveFavorite = event => {
-
+        
     }
 
     return(
@@ -19,7 +19,6 @@ export const FavoriteCard = ({park}) => {
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
             <div className="favorite__buttons">
                 <button onClick={handleClickRemoveFavorite}>Unfavorite</button>
-
             </div>
         </div>
     )

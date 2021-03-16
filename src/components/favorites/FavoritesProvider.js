@@ -8,7 +8,7 @@ export const FavoriteProvider = (props) => {
     const [userFavorites, setUserFavorites] = useState([])
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
-    
+
     const getUserFavorites = () => {
         return fetch(`http://localhost:8088/favorites/?userId=${currentUserId}`)
             .then(res => res.json())
@@ -16,7 +16,7 @@ export const FavoriteProvider = (props) => {
     }
 
     const addFavorite = newFavorite => {
-        return fetch ("http://localhost:8088/favorites", {
+        return fetch("http://localhost:8088/favorites", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -25,9 +25,16 @@ export const FavoriteProvider = (props) => {
         })
     }
 
+    const deleteFavorite = favoriteId => {
+        return fetch(`http://localhost:8088/favorites/${favoriteId}`, {
+            method: "DELETE"
+        })
+            .then(getUserFavorites)
+    }
+
     return (
         <FavoriteContext.Provider value={{
-            userFavorites, getUserFavorites, addFavorite
+            userFavorites, getUserFavorites, addFavorite, deleteFavorite
         }}>
             {props.children}
         </FavoriteContext.Provider>

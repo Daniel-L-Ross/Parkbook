@@ -7,8 +7,6 @@ export const FavoriteCard = ({favorite}) => {
 
     const address = JSON.parse(park.mapped_location.human_address)
 
-    const currentUserId = parseInt(sessionStorage.parkbook_user_id)
-
     const handleClickRemoveFavorite = event => {
         deleteFavorite(favorite.id)
     }

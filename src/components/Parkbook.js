@@ -3,10 +3,8 @@ import { Route, Redirect } from "react-router-dom"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import { userStorageKey } from "./auth/authSettings"
-import { ParkList } from "./parks/ParkList"
-import { ParkProvider } from "./parks/ParkProvider"
-import { FavoriteProvider } from "./favorites/FavoritesProvider"
-import { FavoritesList } from "./favorites/FavoritesList"
+import { NavBar } from "./nav/NavBar"
+import { ApplicationViews } from "./ApplicationViews"
 
 // appication views
 // navbar
@@ -22,15 +20,8 @@ export const Parkbook = () => {
                     return (
                         <>
                             <h1>Welcome to parkbook. </h1>
-                            <section >
-                                <ParkProvider>
-                                    <FavoriteProvider>
-                                        <ParkList />
-                                        <FavoritesList />
-                                    </FavoriteProvider>
-                                </ParkProvider>
-
-                            </section>
+                            <NavBar />
+                            <ApplicationViews />
                         </>
                     )
                 } else {

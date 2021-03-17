@@ -8,29 +8,28 @@ export const ParkSearch = () => {
 
     let searchArray = []
 
-    useEffect(() => {
-        const parkFeatures = () => {
-            let featureArray = []
-            
-            Object.keys(parks[0]).map(feature => {
-                if (parks[0][feature] === "Yes" || "No") {
-                    const prettyFeature = feature.replace(/_/g, ' ')
-                    featureArray.push(prettyFeature)
-                }
-            })
-            return featureArray
-        }
-        getParks()
-        .then(setFeatures(parkFeatures))
-    }, [])
-        
+    // useEffect(() => {
+    //     getParks()
+    //         .then(() =>{
+    //             let featureArray = []
+    //             debugger
+    //             Object.values(parks[0]).map(feature => {
+    //                 if (feature === "Yes" || "No") {
+    //                     const prettyFeature = parks[0][feature].replace(/_/g, ' ')
+    //                     featureArray.push(prettyFeature)
+    //                 }
+    //             }) 
+    //             setFeatures(featureArray)
+    //         })
+    // }, [])
+
     return (
         <>
             Park Search:
             <label htmlFor="features">Features:</label>
             <select>
                 <option value="0">Select a feature</option>
-                {features.map(feature => <option value={feature} key={feature}>{feature}</option>)}
+                {/* {features.map(feature => <option value={feature} key={feature}>{feature}</option>)} */}
             </select>
         </>
     )

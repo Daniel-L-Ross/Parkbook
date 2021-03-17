@@ -37,10 +37,12 @@ export const ParkSearch = () => {
     const handleAddFilter = (event) => {
         searchArray.push(event.target.value)
         setSearchTerms(searchArray)
+        getParks()
     }
 
     const handleClearSearchTerms = () => {
         setSearchTerms([])
+        getParks()
     }
 
 

@@ -3,10 +3,10 @@ import { ParkContext } from "./ParkProvider"
 import "./Park.css"
 
 export const ParkSearch = () => {
-    const { setSearchTerms, parks, getParks } = useContext(ParkContext)
+    const { setSearchTerms, parks, getParks, searchTerms } = useContext(ParkContext)
     const [features, setFeatures] = useState([])
 
-    let searchArray = []
+    let searchArray = [...searchTerms]
 
     useEffect(() => {
         getParks()
@@ -21,7 +21,6 @@ export const ParkSearch = () => {
             Object.keys(templatePark).map(feature => {
                 
                 if (templatePark[feature] === "Yes" || templatePark[feature] === "No") {
-                    console.log("featureValue:", templatePark[feature])
                     const prettyFeature = feature.replace(/_/g, ' ')
                     const featureObj = {
                         featureName: feature,
@@ -30,22 +29,35 @@ export const ParkSearch = () => {
                     featureArray.push(featureObj)
                 }
             }) 
-            debugger
             setFeatures(featureArray)
         }
     }, [parks])
+
+
+    const handleAddFilter = (event) => {
+        searchArray.push(event.target.value)
+        setSearchTerms(searchArray)
+    }
+
+    const handleClearSearchTerms = () => {
+        setSearchTerms([])
+    }
+
 
     return (
         <>
             Park Search:
             <label htmlFor="features">Features:</label>
-            <select>
+            <select onChange={handleAddFilter}>
                 <option value="0">Select a feature</option>
                 {features.map(feature => <option value={feature.featureName} key={feature.featureName}>{feature.featureDisplay}</option>)}
             </select>
             <div className="filters">
+                <button onClick={handleClearSearchTerms}>Clear Filters</button>
                 <h4>Filtering by: </h4>
-                <ul className="filters__features"></ul>
+                <ul className="filters__features">
+                    {searchTerms.map(term => <li>{term}</li>)}
+                </ul>
             </div>
         </>
     )

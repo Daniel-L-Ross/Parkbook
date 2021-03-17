@@ -46,10 +46,12 @@ export const ParkCard = ({ park }) => {
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
             <div className="park__detail">
+                <h4>Features: </h4>
                 <ul className="features">
-                    {parkFeatures().map(feature => <li className="feature">{feature}</li>)}
+                    {parkFeatures().map(feature => <li key={feature} className="feature">{feature}</li>)}
                 </ul>
-                <p>Notes: {park.notes}</p>
+                <h4>Notes:</h4>
+                <p>{park.notes}</p>
             </div>
             <div className="park__buttons">
                 {favorited ? "" : <button onClick={handleClickFavorite}>Favorite</button>}

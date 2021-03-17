@@ -20,7 +20,7 @@ export const ParkList = () => {
         let query
         if (searchTerms.length === 1) {
             query = `/?${searchTerms[0]}=Yes`
-            getParksByFeatures(query)
+            getParksByFeatures(query) /* this line results in an infinte loop*/
             .then(setFiltered(parks))
         } else if (searchTerms.length > 1) {
             setFiltered(parks)

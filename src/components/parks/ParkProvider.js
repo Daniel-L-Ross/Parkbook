@@ -4,6 +4,11 @@ export const ParkContext = createContext()
 
 export const ParkProvider = props => {
     const [parks, setParks] = useState([])
+    /*
+        use common ancestor of parkSearch and parkList to be resposnible for searchterms
+        set to empty array so multiple parameters can be evaluated simultaneously
+    */
+    const [searchTerms, setSearchTerms] = useState([])
 
     const getParks = () => {
         return fetch("http://localhost:8088/parks")
@@ -13,7 +18,7 @@ export const ParkProvider = props => {
 
     return (
         <ParkContext.Provider value ={{
-            getParks, parks
+            getParks, parks, searchTerms, setSearchTerms
         }}>
             {props.children}
         </ParkContext.Provider>

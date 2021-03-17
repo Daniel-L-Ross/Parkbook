@@ -11,9 +11,16 @@ export const ParkProvider = props => {
     const [searchTerms, setSearchTerms] = useState([])
 
     const getParks = () => {
-        return fetch("http://localhost:8088/parks")
+        let fetchUrl = "http://localhost:8088/parks"
+        if (searchTerms.length !== 0) {
+            for (const term of searchTerms) {
+                fetchUrl+= ``
+            }
+        } else {
+            return fetch("http://localhost:8088/parks")
             .then(res => res.json())
             .then(setParks)
+        }
     }
 
     return (

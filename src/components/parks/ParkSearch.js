@@ -6,13 +6,12 @@ export const ParkSearch = () => {
     const { setSearchTerms, parks, getParks, searchTerms } = useContext(ParkContext)
     const [features, setFeatures] = useState([])
 
-    let searchArray = [...searchTerms]
-
+    
     useEffect(() => {
         getParks()
     }, [])
-
-
+    
+    
     useEffect(() => {
         if (parks.length !== 0){
             let featureArray = []
@@ -32,8 +31,9 @@ export const ParkSearch = () => {
             setFeatures(featureArray)
         }
     }, [parks])
-
-
+    
+    let searchArray = [...searchTerms]
+    
     const handleAddFilter = (event) => {
         searchArray.push(event.target.value)
         setSearchTerms(searchArray)
@@ -56,7 +56,7 @@ export const ParkSearch = () => {
                 <button onClick={handleClearSearchTerms}>Clear Filters</button>
                 <h4>Filtering by: </h4>
                 <ul className="filters__features">
-                    {searchTerms.map(term => <li>{term}</li>)}
+                    {searchTerms.map(term => <li>{term.replace(/_/g, ' ')}</li>)}
                 </ul>
             </div>
         </>

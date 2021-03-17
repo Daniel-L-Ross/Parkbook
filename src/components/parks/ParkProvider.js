@@ -19,7 +19,7 @@ export const ParkProvider = props => {
     const getParksByFeatures = query => {
         return fetch(`http://localhost:8088/parks${query}`)
             .then(res => res.json())
-            .then(setParks)
+            // .then(setParks)
     }
 
     return (

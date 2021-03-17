@@ -26,15 +26,35 @@ export const ParkCard = ({ park }) => {
     if (favoriteCheck !== undefined) {
         favorited = true
     }
-    
+
+    const parkFeatures = () => {
+        let featureArray = []
+
+        Object.keys(park).map(feature => {
+            if (park[feature] === "Yes") {
+                const prettyFeature = feature.replace(/_/g, ' ')
+                featureArray.push(prettyFeature)
+            }
+        })
+
+        return featureArray
+    }
+
     return (
         <div className={favorited ? "favorite" : "park"}>
             <h3 className="park__name">{park.park_name}</h3>
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
+            <div className="park__detail">
+                <h4>Features: </h4>
+                <ul className="features">
+                    {parkFeatures().map(feature => <li key={feature} className="feature">{feature}</li>)}
+                </ul>
+                <h4>Notes:</h4>
+                <p>{park.notes}</p>
+            </div>
             <div className="park__buttons">
                 {favorited ? "" : <button onClick={handleClickFavorite}>Favorite</button>}
-
             </div>
         </div>
     )

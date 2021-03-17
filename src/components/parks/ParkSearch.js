@@ -12,7 +12,7 @@ export const ParkSearch = () => {
         getParks()
     }, [])
 
-    
+
     useEffect(() => {
         if (parks.length !== 0){
             let featureArray = []
@@ -23,9 +23,14 @@ export const ParkSearch = () => {
                 if (templatePark[feature] === "Yes" || templatePark[feature] === "No") {
                     console.log("featureValue:", templatePark[feature])
                     const prettyFeature = feature.replace(/_/g, ' ')
-                    featureArray.push(prettyFeature)
+                    const featureObj = {
+                        featureName: feature,
+                        featureDisplay: prettyFeature
+                    }
+                    featureArray.push(featureObj)
                 }
             }) 
+            debugger
             setFeatures(featureArray)
         }
     }, [parks])
@@ -36,8 +41,12 @@ export const ParkSearch = () => {
             <label htmlFor="features">Features:</label>
             <select>
                 <option value="0">Select a feature</option>
-                {features.map(feature => <option value={feature} key={feature}>{feature}</option>)}
+                {features.map(feature => <option value={feature.featureName} key={feature.featureName}>{feature.featureDisplay}</option>)}
             </select>
+            <div className="filters">
+                <h4>Filtering by: </h4>
+                <ul className="filters__features"></ul>
+            </div>
         </>
     )
 }

@@ -6,7 +6,7 @@ import "./Review.css"
 export const ReviewForm = () => {
 
 
-    const reviewId = useParams()
+    const { reviewId } = useParams()
 
     return (
         <form className="reviewForm">

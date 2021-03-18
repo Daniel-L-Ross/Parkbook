@@ -4,6 +4,7 @@ import { FavoritesList } from "./favorites/FavoritesList"
 import { FavoriteProvider } from "./favorites/FavoritesProvider"
 import { ParkList } from "./parks/ParkList"
 import { ParkProvider } from "./parks/ParkProvider"
+import { ParkSearch } from "./parks/ParkSearch"
 
 
 export const ApplicationViews = () => {
@@ -12,6 +13,7 @@ export const ApplicationViews = () => {
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
+                        <ParkSearch />
                         <ParkList />
                     </Route>
                 </ParkProvider>

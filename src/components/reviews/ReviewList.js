@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { Link, useHistory, useParams } from "react-router-dom"
 import "./Review.css"
+import { ReviewCard } from "./ReviewCard"
 import { ReviewContext } from "./ReviewProvider"
 
 export const ReviewList = () => {
@@ -16,7 +17,7 @@ export const ReviewList = () => {
         if (reviews.length === 0) {
             return <h3>No Reviews</h3>
         } else if (reviews.length !== 0) {
-            return reviews.map(review => review.review)
+            return reviews.map(review => <ReviewCard key={review.id} review={review} />)
         }
     }
 
@@ -24,7 +25,9 @@ export const ReviewList = () => {
     return (
         <>
             <h2>Reviews List: </h2>
-            {renderReviews()}
+            <section className="reviews">
+                {renderReviews()}
+            </section>
             <Link to={`/reviews/create/${parkId}/0`}>
                 <button>Add Review</button>
             </Link>

@@ -1,12 +1,13 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { FavoritesList } from "./favorites/FavoritesList"
 import { FavoriteProvider } from "./favorites/FavoritesProvider"
-import { ParkList } from "./parks/ParkList"
+import { FavoritesList } from "./favorites/FavoritesList"
 import { ParkProvider } from "./parks/ParkProvider"
-import { ReviewForm } from "./reviews/ReviewForm"
-import { ReviewList } from "./reviews/ReviewList"
+import { ParkList } from "./parks/ParkList"
+import { ParkSearch } from "./parks/ParkSearch"
 import { ReviewProvider } from "./reviews/ReviewProvider"
+import { ReviewList } from "./reviews/ReviewList"
+import { ReviewForm } from "./reviews/ReviewForm"
 
 
 export const ApplicationViews = () => {
@@ -15,6 +16,7 @@ export const ApplicationViews = () => {
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
+                        <ParkSearch />
                         <ParkList />
                     </Route>
 

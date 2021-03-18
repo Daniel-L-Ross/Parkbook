@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
+import { Link } from "react-router-dom"
 
 
 export const ParkCard = ({ park }) => {
@@ -54,6 +55,9 @@ export const ParkCard = ({ park }) => {
                 <p>{park.notes}</p>
             </div>
             <div className="park__buttons">
+                <Link to={`/reviews/${park.id}`}>
+                {<button>Reviews</button>}
+                </Link>
                 {favorited ? "" : <button onClick={handleClickFavorite}>Favorite</button>}
             </div>
         </div>

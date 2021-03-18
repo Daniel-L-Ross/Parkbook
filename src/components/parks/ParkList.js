@@ -7,9 +7,8 @@ import "../favorites/Favorites.css"
 
 
 export const ParkList = () => {
-    const { parks, getParks, searchTerms, getParksByFeatures } = useContext(ParkContext)
+    const { parks, getParks, searchTerms, getParksByFeatures, filteredParks, setFiltered } = useContext(ParkContext)
     const { getUserFavorites } = useContext(FavoriteContext)
-    const [filteredParks, setFiltered] = useState([])
 
     useEffect(() => {
         getUserFavorites()
@@ -20,7 +19,7 @@ export const ParkList = () => {
         let query
         if (searchTerms.length === 1) {
             query = `/?${searchTerms[0]}=Yes`
-            getParksByFeatures(query) /* this line results in an infinte loop*/
+            getParksByFeatures(query)
             .then(setFiltered(parks))
         } else if (searchTerms.length > 1) {
             setFiltered(parks)

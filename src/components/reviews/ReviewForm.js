@@ -5,11 +5,11 @@ import "./Review.css"
 
 export const ReviewForm = () => {
 
-    const { ParkId, reviewId } = useParams()
+    const { parkId, reviewId } = useParams()
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const [review, setReview] = useState({
-        parkId: ParkId,
+        parkId: parkId,
         userId: currentUserId,
         rating: 0,
         review: "",
@@ -31,7 +31,7 @@ export const ReviewForm = () => {
 
     const handleSaveReview = event => {
         event.preventDefault()
-        console.log(review)
+        console.log(parkId, reviewId)
     }
 
     return (

@@ -25,7 +25,7 @@ export const ReviewList = () => {
         <>
             <h2>Reviews List: </h2>
             {renderReviews()}
-            <Link to={`/reviews/create/${parkId}`}>
+            <Link to={`/reviews/create/${parkId}/0`}>
                 <button>Add Review</button>
             </Link>
         </>

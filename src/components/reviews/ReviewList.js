@@ -6,7 +6,7 @@ import { ReviewContext } from "./ReviewProvider"
 export const ReviewList = () => {
     const { reviews, getReviewsByPark } = useContext(ReviewContext)
 
-const { parkId } =useParams()
+    const { parkId } = useParams()
 
     useEffect(() => {
         getReviewsByPark(parkId)
@@ -25,6 +25,9 @@ const { parkId } =useParams()
         <>
             <h2>Reviews List: </h2>
             {renderReviews()}
+            <Link to={`/reviews/create/${parkId}`}>
+                <button>Add Review</button>
+            </Link>
         </>
     )
 }

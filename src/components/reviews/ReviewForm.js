@@ -17,6 +17,17 @@ export const ReviewForm = () => {
         edited: false
     })
 
+    const handleControlledInputChange = event => {
+        const newReview = { ...review }
+        if (event.target.type === "radio") {
+            let selectedValue = event.target.value
+            newReview[event.target.name] = selectedValue
+        } else if (event.target.type !== "radio") {
+            let selectedValue = event.target.value
+            newReview[event.target.id] = selectedValue
+        }
+        setReview(newReview)
+    }
 
     const handleSaveReview = event => {
         event.preventDefault()
@@ -30,21 +41,21 @@ export const ReviewForm = () => {
                 <div className="form-group">
                     <p>Please rate the park from 1-5, with 1 being the lowest.</p>
                     <label htmlFor="1">1</label>
-                    <input type="radio" id="1" name="rating" value="1" required />
+                    <input type="radio" id="1" name="rating" value="1" onChange={handleControlledInputChange} required />
                     <label htmlFor="2">2</label>
-                    <input type="radio" id="2" name="rating" value="2" />
+                    <input type="radio" id="2" name="rating" value="2" onChange={handleControlledInputChange} />
                     <label htmlFor="3">3</label>
-                    <input type="radio" id="3" name="rating" value="3" />
+                    <input type="radio" id="3" name="rating" value="3" onChange={handleControlledInputChange} />
                     <label htmlFor="4">4</label>
-                    <input type="radio" id="4" name="rating" value="4" />
+                    <input type="radio" id="4" name="rating" value="4" onChange={handleControlledInputChange} />
                     <label htmlFor="5">5</label>
-                    <input type="radio" id="5" name="rating" value="5" />
+                    <input type="radio" id="5" name="rating" value="5" onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label></label>
-                    <textarea type="text" id="reviewText" value={review.review} required ></textarea>
+                    <textarea type="text" id="review" value={review.review} onChange={handleControlledInputChange} required ></textarea>
                 </div>
             </fieldset>
             <button type="submit"

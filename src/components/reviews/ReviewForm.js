@@ -2,25 +2,28 @@ import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 // import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
+import { ReviewContext } from "./ReviewProvider"
 
 export const ReviewForm = () => {
+    const { addReview } = useContext(ReviewContext)
+    const history = useHistory()
 
     const { parkId, reviewId } = useParams()
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const [review, setReview] = useState({
-        parkId: parkId,
-        userId: currentUserId,
+        parkId: parseInt(parkId),
+        userId: parseInt(currentUserId),
         rating: 0,
         review: "",
-        timestamp: 0,
+        timestamp: Date.now(),
         edited: false
     })
 
     const handleControlledInputChange = event => {
         const newReview = { ...review }
         if (event.target.type === "radio") {
-            let selectedValue = event.target.value
+            let selectedValue = parseInt(event.target.value)
             newReview[event.target.name] = selectedValue
         } else if (event.target.type !== "radio") {
             let selectedValue = event.target.value
@@ -31,7 +34,8 @@ export const ReviewForm = () => {
 
     const handleSaveReview = event => {
         event.preventDefault()
-        console.log(parkId, reviewId)
+        addReview(review)
+        .then(() => history.push(`/reviews/${parkId}`))
     }
 
     return (

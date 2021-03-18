@@ -22,7 +22,13 @@ export const ParkList = () => {
             getParksByFeatures(query)
             .then(setFiltered(parks))
         } else if (searchTerms.length > 1) {
-            setFiltered(parks)
+            query = `/?${searchTerms[0]}=Yes`
+            for (let index = 1; index < searchTerms.length; index++) {
+                const feature = searchTerms[index];
+                query += `&${feature}=Yes`
+            }
+            getParksByFeatures(query)
+            .then(setFiltered(parks))
         } else {
             setFiltered(parks)
         }

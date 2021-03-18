@@ -5,6 +5,8 @@ import { FavoriteProvider } from "./favorites/FavoritesProvider"
 import { ParkList } from "./parks/ParkList"
 import { ParkProvider } from "./parks/ParkProvider"
 import { ReviewForm } from "./reviews/ReviewForm"
+import { ReviewList } from "./reviews/ReviewList"
+import { ReviewProvider } from "./reviews/ReviewProvider"
 
 
 export const ApplicationViews = () => {
@@ -17,16 +19,18 @@ export const ApplicationViews = () => {
                     </Route>
 
 
+                    <ReviewProvider>
+                        <Route path="/reviews/:parkId(\d+)">
+                            <ReviewList />
+                        </Route>
+                        <Route path="/reviews/create/:parkId(\d+)">
+                            <ReviewForm />
+                        </Route>
+                        <Route path="/reviews/edit/:parkId(\d+)">
+                            <ReviewForm />
+                        </Route>
+                    </ReviewProvider>
 
-                    <Route path="/reviews/:parkId(\d+)">
-                        <ReviewForm />
-                    </Route>
-                    <Route path="/reviews/create/:parkId(\d+)">
-                        <ReviewForm />
-                    </Route>
-                    <Route path="/reviews/edit/:parkId(\d+)">
-                        <ReviewForm />
-                    </Route>
                 </ParkProvider>
 
                 <Route exact path="/favorites">

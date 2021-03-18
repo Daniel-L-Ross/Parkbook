@@ -55,7 +55,7 @@ export const ParkCard = ({ park }) => {
                 <p>{park.notes}</p>
             </div>
             <div className="park__buttons">
-                <Link to >
+                <Link to={`/reviews/${park.id}`}>
                 {<button>Reviews</button>}
                 </Link>
                 {favorited ? "" : <button onClick={handleClickFavorite}>Favorite</button>}

@@ -1,23 +1,32 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
 import { Link } from "react-router-dom"
 
 
 export const ParkCard = ({ park }) => {
-    const { userFavorites, getUserFavorites, addFavorite } = useContext(FavoriteContext)
+    const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
 
     // use JSON.parse as nested address data was returned as a JSON object
     const address = JSON.parse(park.mapped_location.human_address)
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
-    const handleClickFavorite = event => {
+    const handleAddFavorite = event => {
         const newFavorite = {
             parkId: park.id,
             userId: currentUserId
         }
         addFavorite(newFavorite)
             .then(getUserFavorites)
+    }
+
+    const handleRemoveFavorite = event => {
+
+        const favorite = userFavorites.filter(fav => fav.parkId === park.id && fav.userId === currentUserId)
+        console.log(favorite[0])
+        deleteFavorite(favorite[0].id)
+            .then(getUserFavorites)
+
     }
 
     let favorited = false
@@ -41,12 +50,18 @@ export const ParkCard = ({ park }) => {
         return featureArray
     }
 
+    const [hidden, setHidden] = useState(true)
+
+    const toggleDetail = () => {
+        setHidden(!hidden)
+    }
+
     return (
         <div className={favorited ? "favorite" : "park"}>
             <h3 className="park__name">{park.park_name}</h3>
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
-            <div className="park__detail">
+            <div className={hidden ? "hidden" : "park__detail"}>
                 <h4>Features: </h4>
                 <ul className="features">
                     {parkFeatures().map(feature => <li key={feature} className="feature">{feature}</li>)}
@@ -56,9 +71,10 @@ export const ParkCard = ({ park }) => {
             </div>
             <div className="buttons">
                 <Link to={`/reviews/${park.id}`}>
-                {<button>Reviews</button>}
+                    {<button>Reviews</button>}
                 </Link>
-                {favorited ? "" : <button onClick={handleClickFavorite}>Favorite</button>}
+                {<button onClick={toggleDetail}>{hidden ? "Show Detail" : "Hide Detail"}</button>}
+                {favorited ? <button onClick={handleRemoveFavorite}>Unfavorite</button> : <button onClick={handleAddFavorite}>Favorite</button>}
             </div>
         </div>
     )

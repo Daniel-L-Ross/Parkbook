@@ -7,7 +7,7 @@ export const FavoriteCard = ({favorite}) => {
 
     const address = JSON.parse(park.mapped_location.human_address)
 
-    const handleClickRemoveFavorite = event => {
+    const handleRemoveFavorite = event => {
         deleteFavorite(favorite.id)
     }
 
@@ -17,7 +17,7 @@ export const FavoriteCard = ({favorite}) => {
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
             <div className="favorite__buttons">
-                <button onClick={handleClickRemoveFavorite}>Unfavorite</button>
+                <button onClick={handleRemoveFavorite}>Unfavorite</button>
             </div>
         </div>
     )

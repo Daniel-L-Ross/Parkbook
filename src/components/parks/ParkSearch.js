@@ -9,6 +9,7 @@ export const ParkSearch = () => {
     
     useEffect(() => {
         getParks()
+        return setSearchTerms([])
     }, [])
     
     

@@ -12,7 +12,7 @@ export const ReviewForm = () => {
 
     const [review, setReview] = useState({
         parkId: parseInt(parkId),
-        userId: parseInt(currentUserId),
+        userId: currentUserId,
         rating: 0,
         review: "",
         timestamp: Date.now(),
@@ -37,9 +37,26 @@ export const ReviewForm = () => {
         .then(() => history.push(`/reviews/${parkId}`))
     }
 
+    const formTitle = () => {
+        if (parseInt(reviewId) !== 0){
+            return "Edit Review"
+        } else {
+            return "New Review"
+        }
+    }
+
+    const buttonText = () => {
+        if (parseInt(reviewId) !== 0){
+            return "Confirm Changes"
+        } else {
+            return "Submit Review"
+        }
+    }
+
+
     return (
         <form className="reviewForm" onSubmit={handleSaveReview}>
-            <h2 className="reviewForm__title">{reviewId ? "Edit Review" : "New Review"}</h2>
+            <h2 className="reviewForm__title">{formTitle()}</h2>
             <fieldset>
                 <div className="form-group">
                     <p>Please rate the park from 1-5, with 1 being the lowest.</p>
@@ -64,7 +81,7 @@ export const ReviewForm = () => {
             <button type="submit"
             // disabled={isLoading}>
             >
-                {reviewId ? "Update Review" : "Submit Review"}
+                {buttonText()}
             </button>
         </form>
     )

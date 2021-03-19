@@ -4,15 +4,15 @@ import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
 
 export const ReviewForm = () => {
-    const { addReview } = useContext(ReviewContext)
+    const { addReview, getReviewById, updateReview } = useContext(ReviewContext)
+    const [isLoading, setIsLoading] = useState(true);
     const history = useHistory()
-
     const { parkId, reviewId } = useParams()
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const [review, setReview] = useState({
         parkId: parseInt(parkId),
-        userId: parseInt(currentUserId),
+        userId: currentUserId,
         rating: 0,
         review: "",
         timestamp: Date.now(),
@@ -21,50 +21,93 @@ export const ReviewForm = () => {
 
     const handleControlledInputChange = event => {
         const newReview = { ...review }
-        if (event.target.type === "radio") {
-            let selectedValue = parseInt(event.target.value)
-            newReview[event.target.name] = selectedValue
-        } else if (event.target.type !== "radio") {
-            let selectedValue = event.target.value
-            newReview[event.target.id] = selectedValue
-        }
+
+        let selectedValue = event.target.value
+        newReview[event.target.id] = selectedValue
+
         setReview(newReview)
     }
 
     const handleSaveReview = event => {
         event.preventDefault()
-        addReview(review)
-        .then(() => history.push(`/reviews/${parkId}`))
+        setIsLoading(true)
+
+        if (parseInt(reviewId) !== 0) {
+            updateReview({
+                id: review.id,
+                parkId: parseInt(parkId),
+                userId: currentUserId,
+                rating: review.rating,
+                review: review.review,
+                timestamp: Date.now(),
+                edited: true
+            })
+                .then(() => history.push(`/reviews/${parkId}`))
+        } else {
+            addReview(review)
+                .then(() => history.push(`/reviews/${parkId}`))
+        }
+    }
+
+    const formTitle = () => {
+        if (parseInt(reviewId) !== 0) {
+            return "Edit Review"
+        } else {
+            return "New Review"
+        }
+    }
+
+    const buttonText = () => {
+        if (parseInt(reviewId) !== 0) {
+            return "Confirm Changes"
+        } else {
+            return "Submit Review"
+        }
+    }
+
+    useEffect(() => {
+        if (parseInt(reviewId) !== 0) {
+            getReviewById(reviewId)
+                .then(oldReview => {
+                    setReview(oldReview)
+                    setIsLoading(false)
+                })
+        } else {
+            setIsLoading(false)
+        }
+    }, [])
+
+
+    const ratingOptions = () => {
+        let options = []
+        for (let index = 1; index <= 5; index++) {
+            options.push(<option key={index} value={index}>{index}</option>)
+        }
+        return options
     }
 
     return (
         <form className="reviewForm" onSubmit={handleSaveReview}>
-            <h2 className="reviewForm__title">{reviewId ? "Edit Review" : "New Review"}</h2>
+            <h2 className="reviewForm__title">{formTitle()}</h2>
             <fieldset>
                 <div className="form-group">
                     <p>Please rate the park from 1-5, with 1 being the lowest.</p>
-                    <label htmlFor="1">1</label>
-                    <input type="radio" id="1" name="rating" value="1" onChange={handleControlledInputChange} required />
-                    <label htmlFor="2">2</label>
-                    <input type="radio" id="2" name="rating" value="2" onChange={handleControlledInputChange} />
-                    <label htmlFor="3">3</label>
-                    <input type="radio" id="3" name="rating" value="3" onChange={handleControlledInputChange} />
-                    <label htmlFor="4">4</label>
-                    <input type="radio" id="4" name="rating" value="4" onChange={handleControlledInputChange} />
-                    <label htmlFor="5">5</label>
-                    <input type="radio" id="5" name="rating" value="5" onChange={handleControlledInputChange} />
+
+                    <select value={review.rating} id="rating" onChange={handleControlledInputChange} required >
+                        <option value={0}>Rating...</option>
+                        {ratingOptions()}
+                    </select>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label></label>
-                    <textarea type="text" id="review" value={review.review} onChange={handleControlledInputChange} required ></textarea>
+                    <textarea type="text" id="review" placeholder="Add your review here" value={review.review} onChange={handleControlledInputChange} required ></textarea>
                 </div>
             </fieldset>
             <button type="submit"
-            // disabled={isLoading}>
-            >
-                {reviewId ? "Update Review" : "Submit Review"}
+            disabled={isLoading}>
+                {buttonText()}
             </button>
         </form>
     )

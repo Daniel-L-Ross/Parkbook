@@ -11,9 +11,24 @@ export const ReviewProvider = props => {
             .then(setReviews)
     }
 
+    const getReviewById = reviewId => {
+        return fetch(`http://localhost:8088/reviews/${reviewId}`)
+            .then(res => res.json())
+    }
+
     const addReview = reviewObj => {
         return fetch("http://localhost:8088/reviews", {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(reviewObj)
+        })
+    }
+
+    const updateReview = reviewObj => {
+        return fetch(`http://localhost:8088/reviews/${reviewObj.id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -30,7 +45,7 @@ export const ReviewProvider = props => {
 
     return (
         <ReviewContext.Provider value={{
-            reviews, getReviews, addReview, deleteReview
+            reviews, getReviews, addReview, deleteReview, getReviewById, updateReview
         }}>
             {props.children}
         </ReviewContext.Provider>

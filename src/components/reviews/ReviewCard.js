@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import { Link } from "react-router-dom"
 import { ReviewContext } from "./ReviewProvider"
 
 
@@ -32,6 +33,7 @@ export const ReviewCard = ({ review }) => {
             <p className="review-text">{review.review}</p>
             <p className="author">By: {review.user.name}</p>
             <div className="buttons">
+                {disabled ? "" : <Link to={`/reviews/edit/${review.parkId}/${review.id}`}><button>Edit</button></Link>}
                 {disabled ? "" : <button onClick={handleDeleteReview}>Delete</button>}
             </div>
         </div>

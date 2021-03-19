@@ -1,14 +1,22 @@
-import React from "react"
+import React, { useContext } from "react"
+import { ReviewContext } from "./ReviewProvider"
+
 
 
 
 
 export const ReviewCard = ({ review }) => {
+    const { deleteReview } = useContext(ReviewContext)
+
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
     let disabled = true
 
     if (currentUserId === review.userId) {
         disabled = false
+    }
+
+    const handleDeleteReview = () => {
+        deleteReview(review.id)
     }
 
     return (
@@ -24,7 +32,7 @@ export const ReviewCard = ({ review }) => {
             <p className="review-text">{review.review}</p>
             <p className="author">By: {review.user.name}</p>
             <div className="buttons">
-                {disabled ? "" : <button>Delete</button>}
+                {disabled ? "" : <button onClick={handleDeleteReview}>Delete</button>}
             </div>
         </div>
     )

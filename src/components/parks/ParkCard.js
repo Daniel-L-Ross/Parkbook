@@ -54,7 +54,7 @@ export const ParkCard = ({ park }) => {
                 <h4>Notes:</h4>
                 <p>{park.notes}</p>
             </div>
-            <div className="park__buttons">
+            <div className="buttons">
                 <Link to={`/reviews/${park.id}`}>
                 {<button>Reviews</button>}
                 </Link>

@@ -29,3 +29,17 @@
 .hidden {
   display: none
 }
+
+.filters__list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.filter {
+  list-style-type: none;
+  margin: .3em;
+  padding: .2em;
+  border: 1px solid black;
+  border-radius: 5px;
+}

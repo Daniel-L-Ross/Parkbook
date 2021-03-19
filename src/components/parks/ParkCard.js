@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
 import { Link } from "react-router-dom"
 
@@ -41,12 +41,18 @@ export const ParkCard = ({ park }) => {
         return featureArray
     }
 
+    const [hidden, setHidden] = useState(true)
+
+    const toggleDetail = () => {
+        setHidden(!hidden)
+    }
+
     return (
         <div className={favorited ? "favorite" : "park"}>
             <h3 className="park__name">{park.park_name}</h3>
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
-            <div className="park__detail">
+            <div className={hidden ? "hidden" : "park__detail"}>
                 <h4>Features: </h4>
                 <ul className="features">
                     {parkFeatures().map(feature => <li key={feature} className="feature">{feature}</li>)}
@@ -58,6 +64,7 @@ export const ParkCard = ({ park }) => {
                 <Link to={`/reviews/${park.id}`}>
                 {<button>Reviews</button>}
                 </Link>
+                {<button onClick={toggleDetail}>{hidden ? "Show Detail" : "Hide Detail"}</button>}
                 {favorited ? "" : <button onClick={handleClickFavorite}>Favorite</button>}
             </div>
         </div>

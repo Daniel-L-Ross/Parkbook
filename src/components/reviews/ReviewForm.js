@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
-// import { ReviewContext } from "./ReviewProvider"
-import "./Review.css"
 import { ReviewContext } from "./ReviewProvider"
+import "./Review.css"
 
 export const ReviewForm = () => {
     const { addReview } = useContext(ReviewContext)

@@ -6,21 +6,22 @@ export const ParkSearch = () => {
     const { setSearchTerms, parks, getParks, searchTerms } = useContext(ParkContext)
     const [features, setFeatures] = useState([])
 
-    
+
     useEffect(() => {
         getParks()
+        return setSearchTerms([])
     }, [])
-    
-    
+
+
     useEffect(() => {
-        if (parks.length !== 0){
+        if (parks.length !== 0) {
             let featureArray = []
             // get a park object so the function has access to a template object
             const templatePark = parks[0]
-            
+
             // get the keys, then iterate over the function
             Object.keys(templatePark).map(feature => {
-                
+
                 // only grab the keys that have values of yes or no, which are "boolean" features
                 if (templatePark[feature] === "Yes" || templatePark[feature] === "No") {
                     const prettyFeature = feature.replace(/_/g, ' ')
@@ -32,13 +33,13 @@ export const ParkSearch = () => {
                     }
                     featureArray.push(featureObj)
                 }
-            }) 
+            })
             setFeatures(featureArray)
         }
     }, [parks])
-    
+
     let searchArray = [...searchTerms]
-    
+
     const handleAddFilter = (event) => {
         searchArray.push(event.target.value)
         setSearchTerms(searchArray)
@@ -50,6 +51,16 @@ export const ParkSearch = () => {
         getParks()
     }
 
+    const handleRemoveTerm = event => {
+        const term = event.target.id
+        const termIndex = searchArray.indexOf(term)
+
+        if (termIndex > -1) {
+            searchArray.splice(termIndex, 1)
+        }
+
+        setSearchTerms(searchArray)
+    }
 
     return (
         <>
@@ -63,8 +74,8 @@ export const ParkSearch = () => {
             <div className="filters">
                 <button onClick={handleClearSearchTerms}>Clear Filters</button>
                 <h4>Filtering by: </h4>
-                <ul className="filters__features">
-                    {searchTerms.map(term => <li>{term.replace(/_/g, ' ')}</li>)}
+                <ul className="filters__list">
+                    {searchTerms.map(term => <li className="filter" key={term}><button className="removeTerm" id={term} onClick={handleRemoveTerm}>X</button>{term.replace(/_/g, ' ')}</li>)}
                 </ul>
             </div>
         </>

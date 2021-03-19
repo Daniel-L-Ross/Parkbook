@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link, useHistory, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import "./Review.css"
 import { ReviewCard } from "./ReviewCard"
 import { ReviewContext } from "./ReviewProvider"
@@ -15,7 +15,6 @@ export const ReviewList = () => {
     }, [])
 
     useEffect(() => {
-        debugger
         const currentParkReviews = reviews.filter(review => review.parkId === parseInt(parkId)) 
         const displayReviews = () => {
             if (currentParkReviews.length === 0) {

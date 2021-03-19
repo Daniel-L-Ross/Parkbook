@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { FavoriteContext } from "./FavoritesProvider"
 import { ParkContext } from "../parks/ParkProvider"
-import { FavoriteCard } from "./FavoriteCard"
+import { ParkCard } from "../parks/ParkCard"
 import "./Favorites.css"
 
 export const FavoritesList = () => {
@@ -18,7 +18,7 @@ export const FavoritesList = () => {
             <section className="favorites">
                 {
                     userFavorites.map(favorite => {
-                        return <FavoriteCard key={favorite.id} favorite={favorite} />
+                        return <ParkCard key={favorite.id} park={favorite.park} />
                     })
                 }
             </section>

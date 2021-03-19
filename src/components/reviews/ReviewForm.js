@@ -4,7 +4,7 @@ import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
 
 export const ReviewForm = () => {
-    const { addReview } = useContext(ReviewContext)
+    const { addReview, getReviewById, updateReview } = useContext(ReviewContext)
     const history = useHistory()
 
     const { parkId, reviewId } = useParams()
@@ -53,6 +53,14 @@ export const ReviewForm = () => {
         }
     }
 
+    useEffect(() => {
+        if (parseInt(reviewId) !== 0){
+            getReviewById(reviewId)
+            .then(oldReview => {
+                setReview(oldReview)
+            })
+        }
+    }, [])
 
     return (
         <form className="reviewForm" onSubmit={handleSaveReview}>

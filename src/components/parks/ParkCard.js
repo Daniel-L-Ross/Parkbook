@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
 import { Link } from "react-router-dom"
+import { userStorageKey } from "../auth/authSettings"
 
 
 export const ParkCard = ({ park }) => {
@@ -12,12 +13,17 @@ export const ParkCard = ({ park }) => {
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const handleAddFavorite = event => {
-        const newFavorite = {
-            parkId: park.id,
-            userId: currentUserId
-        }
-        addFavorite(newFavorite)
+        if (sessionStorage.getItem(userStorageKey)) {
+
+            const newFavorite = {
+                parkId: park.id,
+                userId: currentUserId
+            }
+            addFavorite(newFavorite)
             .then(getUserFavorites)
+        } else {
+            window.alert("Log in to add a park to favorites")
+        }
     }
 
     const handleRemoveFavorite = event => {

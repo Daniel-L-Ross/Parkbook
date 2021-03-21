@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { Link, useHistory } from "react-router-dom";
 import { authApi, userStorageKey } from "./authSettings"
+import { LoginContext } from "./LoginProvider";
 import "./Login.css"
 
 
 export const Login = () => {
     const [loginUser, setLoginUser] = useState({ email: "" })
     const [existDialog, setExistDialog] = useState(false)
+
+    const { setLoggedIn } = useContext(LoginContext)
 
     const history = useHistory()
 
@@ -30,7 +33,8 @@ export const Login = () => {
             .then(exists => {
                 if (exists) {
                     sessionStorage.setItem(userStorageKey, exists.id)
-                    history.push("/")
+                    setLoggedIn(true)
+                        .then(() => history.push("/"))
                 } else {
                     setExistDialog(true)
                 }

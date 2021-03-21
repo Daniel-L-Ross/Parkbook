@@ -8,6 +8,8 @@ import { ParkSearch } from "./parks/ParkSearch"
 import { ReviewProvider } from "./reviews/ReviewProvider"
 import { ReviewList } from "./reviews/ReviewList"
 import { ReviewForm } from "./reviews/ReviewForm"
+import { Login } from "./auth/Login"
+import { Register } from "./auth/Register"
 
 
 export const ApplicationViews = () => {
@@ -15,6 +17,7 @@ export const ApplicationViews = () => {
         <>
             <FavoriteProvider>
                 <ParkProvider>
+
                     <Route exact path="/">
                         <ParkSearch />
                         <ParkList />
@@ -39,6 +42,14 @@ export const ApplicationViews = () => {
                     <FavoritesList />
                 </Route>
             </FavoriteProvider>
+
+            <Route path="/login">
+                <Login />
+            </Route>
+            <Route path="/register">
+                <Register />
+            </Route>
+
         </>
     )
 }

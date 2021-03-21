@@ -1,28 +1,25 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { Login } from "./auth/Login"
+import { LoginProvider } from "./auth/LoginProvider"
 import { Register } from "./auth/Register"
 import { userStorageKey } from "./auth/authSettings"
 import { NavBar } from "./nav/NavBar"
 import { ApplicationViews } from "./ApplicationViews"
 
-// appication views
-// navbar
-// login
-// register
-// import "./Parkbook.css"
-
 export const Parkbook = () => {
     return (
         <>
-            <Route render={() => {
+            {/* <Route render={() => {
                 if (sessionStorage.getItem(userStorageKey)) {
                     return (
-                        <>
-                            <h1>Welcome to parkbook. </h1>
-                            <NavBar />
-                            <ApplicationViews />
-                        </>
+                        <> */}
+            <h1>Welcome to parkbook. </h1>
+            <LoginProvider>
+                <NavBar />
+                <ApplicationViews />
+            </LoginProvider>
+            {/* </>
                     )
                 } else {
                     return <Redirect to="/login" />;
@@ -34,7 +31,7 @@ export const Parkbook = () => {
             </Route>
             <Route path="/register">
                 <Register />
-            </Route>
+            </Route> */}
         </>
     )
 }

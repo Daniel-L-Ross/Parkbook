@@ -11,6 +11,8 @@ export const NavBar = () => {
     useEffect(() => {
         if (sessionStorage.getItem(userStorageKey)){
             setLoggedIn(true)
+        } else {
+            setLoggedIn(false)
         }
     }, [])
 

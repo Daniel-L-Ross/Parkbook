@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react"
+import { userStorageKey } from "../auth/authSettings"
 
 export const FavoriteContext = createContext()
 
@@ -11,10 +12,14 @@ export const FavoriteProvider = (props) => {
 
     const getUserFavorites = () => {
             return fetch(`http://localhost:8088/favorites/?userId=${currentUserId}&_expand=park`)
-            .then(res => { 
-                debugger 
-                res.json()})
-            .then(setUserFavorites)
+            .then(res => res.json())
+            .then((userFavorites) => {
+            if (sessionStorage.getItem(userStorageKey)) {
+                setUserFavorites(userFavorites)
+            } else {
+                setUserFavorites([])
+            }
+            })
     }
 
     const addFavorite = newFavorite => {

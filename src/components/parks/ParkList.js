@@ -14,10 +14,10 @@ export const ParkList = () => {
     const { loggedIn } = useContext(LoginContext)
 
     // get parks after initial render
-    useEffect(() => {
-        getUserFavorites()
-            .then(getParks)
-    }, [])
+    // useEffect(() => {
+    //     getUserFavorites()
+    //         .then(getParks)
+    // }, [])
 
     useEffect(() => {
         console.log(loggedIn)

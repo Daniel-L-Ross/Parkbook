@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { ParkContext } from "./ParkProvider"
 import { ParkCard } from "./ParkCard"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
+import { LoginContext } from "../auth/LoginProvider"
 import "./Park.css"
 import "../favorites/Favorites.css"
 
@@ -10,11 +11,19 @@ export const ParkList = () => {
     const { parks, getParks, searchTerms, getParksByFeatures, filteredParks, setFiltered } = useContext(ParkContext)
     const { getUserFavorites } = useContext(FavoriteContext)
 
+    const { loggedIn } = useContext(LoginContext)
+
     // get parks after initial render
     useEffect(() => {
         getUserFavorites()
             .then(getParks)
     }, [])
+
+    useEffect(() => {
+        console.log(loggedIn)
+        getUserFavorites()
+            .then(getParks)
+    }, [loggedIn])
 
     // if parks or searchTerms change, this runs
     useEffect(() => {

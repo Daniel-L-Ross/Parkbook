@@ -1,11 +1,18 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { LoginContext } from "../auth/LoginProvider"
+import { userStorageKey } from "../auth/authSettings"
 import "./NavBar.css"
 
-export const NavBar = (props) => {
+export const NavBar = () => {
     const {loggedIn, setLoggedIn} = useContext(LoginContext)
     const history = useHistory()
+
+    useEffect(() => {
+        if (sessionStorage.getItem(userStorageKey)){
+            setLoggedIn(true)
+        }
+    }, [])
 
     const handleFavoritesLink = () => {
         if (loggedIn) {

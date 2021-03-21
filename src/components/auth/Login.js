@@ -9,7 +9,7 @@ export const Login = () => {
     const [loginUser, setLoginUser] = useState({ email: "" })
     const [existDialog, setExistDialog] = useState(false)
 
-    const { setLoggedIn } = useContext(LoginContext)
+    const { loggedIn, setLoggedIn } = useContext(LoginContext)
 
     const history = useHistory()
 
@@ -34,7 +34,7 @@ export const Login = () => {
                 if (exists) {
                     sessionStorage.setItem(userStorageKey, exists.id)
                     setLoggedIn(true)
-                        .then(() => history.push("/"))
+                    history.push("/")
                 } else {
                     setExistDialog(true)
                 }

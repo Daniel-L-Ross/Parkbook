@@ -27,12 +27,9 @@ export const ParkCard = ({ park }) => {
     }
 
     const handleRemoveFavorite = event => {
-
         const favorite = userFavorites.filter(fav => fav.parkId === park.id && fav.userId === currentUserId)
-        console.log(favorite[0])
         deleteFavorite(favorite[0].id)
             .then(getUserFavorites)
-
     }
 
     let favorited = false

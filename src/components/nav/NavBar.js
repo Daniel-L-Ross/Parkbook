@@ -5,11 +5,11 @@ import { userStorageKey } from "../auth/authSettings"
 import "./NavBar.css"
 
 export const NavBar = () => {
-    const {loggedIn, setLoggedIn} = useContext(LoginContext)
+    const { loggedIn, setLoggedIn } = useContext(LoginContext)
     const history = useHistory()
 
     useEffect(() => {
-        if (sessionStorage.getItem(userStorageKey)){
+        if (sessionStorage.getItem(userStorageKey)) {
             setLoggedIn(true)
         } else {
             setLoggedIn(false)
@@ -21,6 +21,14 @@ export const NavBar = () => {
             history.push("/favorites")
         } else {
             window.alert("Please login to see favorites")
+        }
+    }
+
+    const handleUserLink = () => {
+        if (loggedIn) {
+            history.push("/user")
+        } else {
+            window.alert("Please login to see user profile")
         }
     }
 
@@ -39,10 +47,10 @@ export const NavBar = () => {
                 <Link className="navbar__link" onClick={handleFavoritesLink}>Favorites</Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/user">User</Link>
+                <Link className="navbar__link" onClick={handleUserLink}>User</Link>
             </li>
             <li className="navbar__item">
-                {loggedIn ? <Link className="navbar__link" onClick={handleLogout}>Logout</Link> : <Link className="navbar__link" to="/login">Login</Link>}
+                {loggedIn ? <Link className="navbar__link" onClick={handleLogout}>Logout</Link> : <Link className="navbar__link" to="/login-or-register">Login</Link>}
             </li>
         </ul>
     )

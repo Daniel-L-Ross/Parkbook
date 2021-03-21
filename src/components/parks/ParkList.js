@@ -13,14 +13,8 @@ export const ParkList = () => {
 
     const { loggedIn } = useContext(LoginContext)
 
-    // get parks after initial render
-    // useEffect(() => {
-    //     getUserFavorites()
-    //         .then(getParks)
-    // }, [])
-
+    // get parks whenever loggedIn state is changed
     useEffect(() => {
-        console.log(loggedIn)
         getUserFavorites()
             .then(getParks)
     }, [loggedIn])
@@ -28,16 +22,14 @@ export const ParkList = () => {
     // if parks or searchTerms change, this runs
     useEffect(() => {
         // define variable for dynamic api call
-        let query
+        let query = `/?${searchTerms[0]}=Yes`
         // if there is 1 search term, do this
         if (searchTerms.length === 1) {
-            query = `/?${searchTerms[0]}=Yes`
             getParksByFeatures(query)
             .then(setFiltered(parks))
 
             // if there are multiple searchTerms, do this
         } else if (searchTerms.length > 1) {
-            query = `/?${searchTerms[0]}=Yes`
             for (let index = 1; index < searchTerms.length; index++) {
                 const feature = searchTerms[index];
                 query += `&${feature}=Yes`

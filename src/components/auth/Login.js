@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react"
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { authApi, userStorageKey } from "./authSettings"
 import { LoginContext } from "./LoginProvider";
 import "./Login.css"
@@ -9,7 +9,7 @@ export const Login = () => {
     const [loginUser, setLoginUser] = useState({ email: "" })
     const [existDialog, setExistDialog] = useState(false)
 
-    const { loggedIn, setLoggedIn } = useContext(LoginContext)
+    const { setLoggedIn } = useContext(LoginContext)
 
     const history = useHistory()
 
@@ -42,15 +42,14 @@ export const Login = () => {
     }
 
     return (
-        <main className="container--login">
+        <main className="container--login" style={{ textAlign: "center" }}>
             <dialog className="dialog dialog--auth" open={existDialog}>
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => setExistDialog(false)}>Close</button>
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Nutshell</h1>
-                    <h2>Please sign in</h2>
+                    <h2 className="h3 mb-3 font-weight-normal">Sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input type="email"
@@ -69,7 +68,6 @@ export const Login = () => {
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">Register for an account</Link>
             </section>
         </main>
     )

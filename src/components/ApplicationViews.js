@@ -10,6 +10,7 @@ import { ReviewList } from "./reviews/ReviewList"
 import { ReviewForm } from "./reviews/ReviewForm"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { LoginRegister } from "./auth/LoginRegister"
 
 
 export const ApplicationViews = () => {
@@ -43,13 +44,9 @@ export const ApplicationViews = () => {
                 </Route>
             </FavoriteProvider>
 
-            <Route path="/login">
-                <Login />
+            <Route path="/login-or-register">
+                <LoginRegister />
             </Route>
-            <Route path="/register">
-                <Register />
-            </Route>
-
         </>
     )
 }

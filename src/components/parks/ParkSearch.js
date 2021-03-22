@@ -63,7 +63,7 @@ export const ParkSearch = () => {
     }
 
     return (
-        <>
+        <div className="column is-one-fifth">
             Park Search:
             <label htmlFor="features">Features:</label>
             <select onChange={handleAddFilter}>
@@ -78,6 +78,6 @@ export const ParkSearch = () => {
                     {searchTerms.map(term => <li className="filter" key={term}><button className="removeTerm" id={term} onClick={handleRemoveTerm}>X</button>{term.replace(/_/g, ' ')}</li>)}
                 </ul>
             </div>
-        </>
+        </div>
     )
 }

@@ -15,7 +15,7 @@ import { UserProvider } from "./users/UserProvider"
 
 export const ApplicationViews = () => {
     return (
-        <>
+        <div className="columns">
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
@@ -50,6 +50,6 @@ export const ApplicationViews = () => {
             <Route path="/login-or-register">
                 <LoginRegister />
             </Route>
-        </>
+        </div>
     )
 }

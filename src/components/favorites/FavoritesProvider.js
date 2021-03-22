@@ -12,7 +12,6 @@ export const FavoriteProvider = (props) => {
 
     // get favorites by userId. Expand parks. 
     const getUserFavorites = () => {
-        debugger
             return fetch(`http://localhost:8088/favorites/?userId=${currentUserId}&_expand=park`)
             .then(res => res.json())
             .then((userFavorites) => {

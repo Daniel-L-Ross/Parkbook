@@ -80,7 +80,7 @@ export const ParkCard = ({ park }) => {
             </div>
             
             <div className="buttons">
-                <Link to={`/reviews/${park.id}`}>
+                <Link to={`/parks/${park.id}/reviews`}>
                     {<button>Reviews</button>}
                 </Link>
                 {<button onClick={toggleDetail}>{hidden ? "Show Detail" : "Hide Detail"}</button>}

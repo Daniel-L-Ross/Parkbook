@@ -32,7 +32,7 @@ export const ReviewList = () => {
 
     const handleAddReview = () => {
         if (sessionStorage.getItem(userStorageKey)) {
-            history.push(`/reviews/create/${parkId}/0`)
+            history.push(`/parks/${parkId}/reviews/create`)
         } else {
             window.alert("Please log in to add a review.")
         }

@@ -31,8 +31,7 @@ export const ReviewForm = () => {
     const handleSaveReview = event => {
         event.preventDefault()
         setIsLoading(true)
-
-        if (parseInt(reviewId) !== 0) {
+        if (reviewId) {
             updateReview({
                 id: review.id,
                 parkId: parseInt(parkId),
@@ -42,15 +41,15 @@ export const ReviewForm = () => {
                 timestamp: Date.now(),
                 edited: true
             })
-                .then(() => history.push(`/reviews/${parkId}`))
+                .then(() => history.push(`/parks/${parkId}/reviews`))
         } else {
             addReview(review)
-                .then(() => history.push(`/reviews/${parkId}`))
+                .then(() => history.push(`/parks/${parkId}/reviews`))
         }
     }
 
     const formTitle = () => {
-        if (parseInt(reviewId) !== 0) {
+        if (reviewId) {
             return "Edit Review"
         } else {
             return "New Review"
@@ -58,7 +57,7 @@ export const ReviewForm = () => {
     }
 
     const buttonText = () => {
-        if (parseInt(reviewId) !== 0) {
+        if (reviewId) {
             return "Confirm Changes"
         } else {
             return "Submit Review"
@@ -66,7 +65,7 @@ export const ReviewForm = () => {
     }
 
     useEffect(() => {
-        if (parseInt(reviewId) !== 0) {
+        if (reviewId) {
             getReviewById(reviewId)
                 .then(oldReview => {
                     setReview(oldReview)

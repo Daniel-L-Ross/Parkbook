@@ -8,14 +8,17 @@ export const UserProfile = () => {
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     useEffect(() => {
+        debugger
         getUserById(currentUserId)
     }, [])
 
+
+    
     return (
         <>
             <h1>User Profile</h1>
-            <p>Hi, {user.name}.</p>
-            <div>Your email: {user.email}</div>
+            <p>Hi, {user ? user.name : ""}.</p>
+            <div>Your email: {user ? user.email: ""}</div>
         </>
     )
 }

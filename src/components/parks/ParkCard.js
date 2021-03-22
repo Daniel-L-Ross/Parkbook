@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
-import { Link } from "react-router-dom"
 import { userStorageKey } from "../auth/authSettings"
+import { useHistory } from "react-router"
 
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
-
+    const history = useHistory()
     // Nested address data was returned as a JSON object
     const address = JSON.parse(park.mapped_location.human_address)
 
@@ -19,7 +19,7 @@ export const ParkCard = ({ park }) => {
                 userId: currentUserId
             }
             addFavorite(newFavorite)
-            .then(getUserFavorites)
+                .then(getUserFavorites)
         } else {
             window.alert("Log in to add a park to favorites")
         }
@@ -41,7 +41,7 @@ export const ParkCard = ({ park }) => {
 
     const parkFeatures = () => {
         let featureArray = []
-        
+
         // iterate over all the keys
         Object.keys(park).map(feature => {
             // get all keys that hold a value of "Yes"
@@ -54,6 +54,11 @@ export const ParkCard = ({ park }) => {
         })
 
         return featureArray
+    }
+
+
+    const handleReviewsLink = () => {
+        history.push(`/reviews/${park.id}`)
     }
 
     // controls state variable to display or hide park details info
@@ -78,13 +83,11 @@ export const ParkCard = ({ park }) => {
                 <h4>Notes:</h4>
                 <p>{park.notes}</p>
             </div>
-            
+
             <div className="buttons">
-                <Link to={`/reviews/${park.id}`}>
-                    {<button>Reviews</button>}
-                </Link>
+                {<button onClick={handleReviewsLink} className="button is-small is-primary">Reviews</button>}
                 {<button onClick={toggleDetail} className="button is-small is-primary">{hidden ? "Show Detail" : "Hide Detail"}</button>}
-                {favorited ? <button onClick={handleRemoveFavorite}>Unfavorite</button> : <button onClick={handleAddFavorite}>Favorite</button>}
+                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-primary">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-primary">Favorite</button>}
             </div>
         </div>
     )

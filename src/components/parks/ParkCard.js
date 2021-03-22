@@ -69,25 +69,29 @@ export const ParkCard = ({ park }) => {
     }
 
     return (
-        <div className={favorited ? "favorite" : "park"}>
-            <h3 className="park__name">{park.park_name}</h3>
-            <p>Park Size: {park.acres} acres</p>
-            <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
-
-            {/* toggle class to set display to hidden */}
-            <div className={hidden ? "hidden" : "park__detail"}>
-                <h4>Features: </h4>
-                <ul className="features">
-                    {parkFeatures().map(feature => <li key={feature} className="feature">{feature}</li>)}
-                </ul>
-                <h4>Notes:</h4>
-                <p>{park.notes}</p>
+        <div className={favorited ? "favorite card" : "park card"}>
+            <div className="card-header">
+                <h3 className="card-header-title">{park.park_name}</h3>
             </div>
+            <div className="card-content">
 
-            <div className="buttons">
-                {<button onClick={handleReviewsLink} className="button is-small is-primary">Reviews</button>}
-                {<button onClick={toggleDetail} className="button is-small is-primary">{hidden ? "Show Detail" : "Hide Detail"}</button>}
-                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-primary">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-primary">Favorite</button>}
+                <p>Park Size: {park.acres} acres</p>
+                <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
+
+                {/* toggle class to set display to hidden */}
+                <div className={hidden ? "hidden" : "park__detail"}>
+                    <h4>Features: </h4>
+                    <ul className="features">
+                        {parkFeatures().map(feature => <li key={feature} className="feature">{feature}</li>)}
+                    </ul>
+                    <h4>Notes:</h4>
+                    <p>{park.notes}</p>
+                </div>
+            </div>
+            <div className="card-footer">
+                {<button onClick={handleReviewsLink} className="button is-small is-primary card-footer-item">Reviews</button>}
+                {<button onClick={toggleDetail} className="button is-small is-primary card-footer-item">{hidden ? "Show Detail" : "Hide Detail"}</button>}
+                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-primary card-footer-item">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-primary card-footer-item">Favorite</button>}
             </div>
         </div>
     )

@@ -10,28 +10,11 @@ import { ApplicationViews } from "./ApplicationViews"
 export const Parkbook = () => {
     return (
         <>
-            {/* <Route render={() => {
-                if (sessionStorage.getItem(userStorageKey)) {
-                    return (
-                        <> */}
             <h1>Welcome to parkbook. </h1>
             <LoginProvider>
                 <NavBar />
                 <ApplicationViews />
             </LoginProvider>
-            {/* </>
-                    )
-                } else {
-                    return <Redirect to="/login" />;
-                }
-            }} />
-
-            <Route path="/login">
-                <Login />
-            </Route>
-            <Route path="/register">
-                <Register />
-            </Route> */}
         </>
     )
 }

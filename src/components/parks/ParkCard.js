@@ -83,7 +83,7 @@ export const ParkCard = ({ park }) => {
                 <Link to={`/reviews/${park.id}`}>
                     {<button>Reviews</button>}
                 </Link>
-                {<button onClick={toggleDetail}>{hidden ? "Show Detail" : "Hide Detail"}</button>}
+                {<button onClick={toggleDetail} className="button is-small is-primary">{hidden ? "Show Detail" : "Hide Detail"}</button>}
                 {favorited ? <button onClick={handleRemoveFavorite}>Unfavorite</button> : <button onClick={handleAddFavorite}>Favorite</button>}
             </div>
         </div>

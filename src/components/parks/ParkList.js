@@ -45,7 +45,7 @@ export const ParkList = () => {
     }, [parks, searchTerms])
 
     return (
-        <div>
+        <div className="column">
             <h2>Here is the parkList: </h2>
             <section className="parks">
                 {

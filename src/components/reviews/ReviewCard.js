@@ -23,7 +23,7 @@ export const ReviewCard = ({ review }) => {
             <p className="review-text">{review.review}</p>
             <p className="author">By: {review.user.name}</p>
             <div className="buttons">
-                {disabled ? "" : <Link to={`/reviews/edit/${review.parkId}/${review.id}`}><button>Edit</button></Link>}
+                {disabled ? "" : <Link to={`/parks/${review.parkId}/reviews/${review.id}/edit`}><button>Edit</button></Link>}
                 {disabled ? "" : <button onClick={handleDeleteReview}>Delete</button>}
             </div>
         </div>

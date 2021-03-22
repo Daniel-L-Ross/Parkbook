@@ -58,7 +58,7 @@ export const ParkCard = ({ park }) => {
 
 
     const handleReviewsLink = () => {
-        history.push(`/reviews/${park.id}`)
+        history.push(`/parks/${park.id}/reviews`)
     }
 
     // controls state variable to display or hide park details info

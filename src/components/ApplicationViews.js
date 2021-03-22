@@ -24,13 +24,13 @@ export const ApplicationViews = () => {
                     </Route>
 
                     <ReviewProvider>
-                        <Route path="/reviews/:parkId(\d+)">
+                        <Route exact path="/parks/:parkId(\d+)/reviews">
                             <ReviewList />
                         </Route>
-                        <Route path="/reviews/create/:parkId/:reviewId">
+                        <Route path="/parks/:parkId(\d+)/reviews/create">
                             <ReviewForm />
                         </Route>
-                        <Route path="/reviews/edit/:parkId/:reviewId">
+                        <Route path="/parks/:parkId(\d+)/reviews/:reviewId(\d+)/edit">
                             <ReviewForm />
                         </Route>
                     </ReviewProvider>

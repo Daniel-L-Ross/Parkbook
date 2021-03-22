@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { LoginContext } from "../auth/LoginProvider"
 import { userStorageKey } from "../auth/authSettings"
+import parkbook1 from "../../images/parkbook1.png"
 import "./NavBar.css"
 
 export const NavBar = () => {
@@ -41,6 +42,7 @@ export const NavBar = () => {
 
     return (
         <ul className="navbar">
+            <img src={parkbook1} alt="logo"/>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/">Parkbook</Link>
             </li>

@@ -1,14 +1,14 @@
 .parks {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   }
 
-  .park {
-    flex-basis: 28%;
-    margin: 1em;
-    padding: 1em;
-    border: 1px solid goldenrod;
+.park {
+  flex-basis: 28%;
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid goldenrod;
 }
 
 .features {

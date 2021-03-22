@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { authApi, userStorageKey } from "./authSettings"
+import { LoginContext } from "./LoginProvider"
 import "./Login.css"
 
 export const Register = () => {
 
     const [registerUser, setRegisterUser] = useState({ firstName: "", lastName: "", email: "" })
     const [conflictDialog, setConflictDialog] = useState(false)
+
+    const { setLoggedIn } = useContext(LoginContext)
 
     const history = useHistory()
 
@@ -43,6 +46,7 @@ export const Register = () => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 sessionStorage.setItem(userStorageKey, createdUser.id)
+                                setLoggedIn(true)
                                 history.push("/")
                             }
                         })
@@ -63,7 +67,7 @@ export const Register = () => {
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register for Application Name</h1>
+                <h2 className="h3 mb-3 font-weight-normal">Register for Parkbook</h2>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
                     <input type="text" name="firstName" id="firstName" className="form-control" placeholder="First name" required autoFocus value={registerUser.firstName} onChange={handleInputChange} />

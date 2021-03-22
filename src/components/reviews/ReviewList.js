@@ -1,21 +1,24 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import "./Review.css"
+import { Link, useHistory, useParams } from "react-router-dom"
+import { userStorageKey } from "../auth/authSettings"
 import { ReviewCard } from "./ReviewCard"
 import { ReviewContext } from "./ReviewProvider"
+import "./Review.css"
+
 
 export const ReviewList = () => {
     const { reviews, getReviews } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
 
     const { parkId } = useParams()
+    const history = useHistory()
 
     useEffect(() => {
         getReviews()
     }, [])
 
     useEffect(() => {
-        const currentParkReviews = reviews.filter(review => review.parkId === parseInt(parkId)) 
+        const currentParkReviews = reviews.filter(review => review.parkId === parseInt(parkId))
         const displayReviews = () => {
             if (currentParkReviews.length === 0) {
                 return <h3>No Reviews</h3>
@@ -26,6 +29,13 @@ export const ReviewList = () => {
         setFiltered(displayReviews())
     }, [reviews])
 
+    const handleAddReview = () => {
+        if (sessionStorage.getItem(userStorageKey)) {
+            history.push(`/reviews/create/${parkId}/0`)
+        } else {
+            window.alert("Please log in to add a review.")
+        }
+    }
 
     return (
         <>
@@ -33,9 +43,7 @@ export const ReviewList = () => {
             <section className="reviews">
                 {filteredReviews}
             </section>
-            <Link to={`/reviews/create/${parkId}/0`}>
-                <button>Add Review</button>
-            </Link>
+            <button onClick={handleAddReview}>Add Review</button>
         </>
     )
 }

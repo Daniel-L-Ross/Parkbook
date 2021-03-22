@@ -101,12 +101,11 @@ export const ReviewForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label></label>
                     <textarea type="text" id="review" placeholder="Add your review here" value={review.review} onChange={handleControlledInputChange} required ></textarea>
                 </div>
             </fieldset>
             <button type="submit"
-            disabled={isLoading}>
+                disabled={isLoading}>
                 {buttonText()}
             </button>
         </form>

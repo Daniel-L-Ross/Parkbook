@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { LoginContext } from "../auth/LoginProvider"
 import { userStorageKey } from "../auth/authSettings"
@@ -8,6 +8,7 @@ export const NavBar = () => {
     const { loggedIn, setLoggedIn } = useContext(LoginContext)
     const history = useHistory()
 
+    // NavBar renders on every page so it checks to see if user is logged in, then sets the state variable
     useEffect(() => {
         if (sessionStorage.getItem(userStorageKey)) {
             setLoggedIn(true)

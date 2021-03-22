@@ -8,8 +8,6 @@ import { ParkSearch } from "./parks/ParkSearch"
 import { ReviewProvider } from "./reviews/ReviewProvider"
 import { ReviewList } from "./reviews/ReviewList"
 import { ReviewForm } from "./reviews/ReviewForm"
-import { Login } from "./auth/Login"
-import { Register } from "./auth/Register"
 import { LoginRegister } from "./auth/LoginRegister"
 import { UserProfile } from "./users/UserProfile"
 import { UserProvider } from "./users/UserProvider"
@@ -20,12 +18,10 @@ export const ApplicationViews = () => {
         <>
             <FavoriteProvider>
                 <ParkProvider>
-
                     <Route exact path="/">
                         <ParkSearch />
                         <ParkList />
                     </Route>
-
 
                     <ReviewProvider>
                         <Route path="/reviews/:parkId(\d+)">
@@ -38,9 +34,8 @@ export const ApplicationViews = () => {
                             <ReviewForm />
                         </Route>
                     </ReviewProvider>
-
                 </ParkProvider>
-
+                
                 <Route exact path="/favorites">
                     <FavoritesList />
                 </Route>

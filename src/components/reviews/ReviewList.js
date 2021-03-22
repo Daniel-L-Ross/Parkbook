@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link, useHistory, useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import { userStorageKey } from "../auth/authSettings"
 import { ReviewCard } from "./ReviewCard"
 import { ReviewContext } from "./ReviewProvider"
@@ -17,6 +17,7 @@ export const ReviewList = () => {
         getReviews()
     }, [])
 
+    // whenever reviews changes, get all the reviews for the current park. Handle empty review array. 
     useEffect(() => {
         const currentParkReviews = reviews.filter(review => review.parkId === parseInt(parkId))
         const displayReviews = () => {

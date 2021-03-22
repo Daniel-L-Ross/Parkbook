@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { authApi, userStorageKey } from "./authSettings"
+import { LoginContext } from "./LoginProvider"
 import "./Login.css"
 
 export const Register = () => {
 
     const [registerUser, setRegisterUser] = useState({ firstName: "", lastName: "", email: "" })
     const [conflictDialog, setConflictDialog] = useState(false)
+
+    const { setLoggedIn } = useContext(LoginContext)
 
     const history = useHistory()
 
@@ -43,6 +46,7 @@ export const Register = () => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 sessionStorage.setItem(userStorageKey, createdUser.id)
+                                setLoggedIn(true)
                                 history.push("/")
                             }
                         })

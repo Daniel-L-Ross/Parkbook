@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react"
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom"
 import { authApi, userStorageKey } from "./authSettings"
-import { LoginContext } from "./LoginProvider";
+import { LoginContext } from "./LoginProvider"
 import "./Login.css"
 
 

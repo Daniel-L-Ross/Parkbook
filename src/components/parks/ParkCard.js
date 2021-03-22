@@ -7,14 +7,13 @@ import { userStorageKey } from "../auth/authSettings"
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
 
-    // use JSON.parse as nested address data was returned as a JSON object
+    // Nested address data was returned as a JSON object
     const address = JSON.parse(park.mapped_location.human_address)
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const handleAddFavorite = event => {
         if (sessionStorage.getItem(userStorageKey)) {
-
             const newFavorite = {
                 parkId: park.id,
                 userId: currentUserId
@@ -42,10 +41,14 @@ export const ParkCard = ({ park }) => {
 
     const parkFeatures = () => {
         let featureArray = []
-
+        
+        // iterate over all the keys
         Object.keys(park).map(feature => {
+            // get all keys that hold a value of "Yes"
             if (park[feature] === "Yes") {
+                // remove underscores
                 const prettyFeature = feature.replace(/_/g, ' ')
+                // add it to an array for rendering
                 featureArray.push(prettyFeature)
             }
         })
@@ -53,6 +56,7 @@ export const ParkCard = ({ park }) => {
         return featureArray
     }
 
+    // controls state variable to display or hide park details info
     const [hidden, setHidden] = useState(true)
 
     const toggleDetail = () => {
@@ -64,6 +68,8 @@ export const ParkCard = ({ park }) => {
             <h3 className="park__name">{park.park_name}</h3>
             <p>Park Size: {park.acres} acres</p>
             <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
+
+            {/* toggle class to set display to hidden */}
             <div className={hidden ? "hidden" : "park__detail"}>
                 <h4>Features: </h4>
                 <ul className="features">
@@ -72,6 +78,7 @@ export const ParkCard = ({ park }) => {
                 <h4>Notes:</h4>
                 <p>{park.notes}</p>
             </div>
+            
             <div className="buttons">
                 <Link to={`/reviews/${park.id}`}>
                     {<button>Reviews</button>}

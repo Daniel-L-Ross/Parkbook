@@ -106,7 +106,7 @@ export const ReviewForm = () => {
                 </div>
             </fieldset>
             <button type="submit"
-            disabled={isLoading}>
+                disabled={isLoading}>
                 {buttonText()}
             </button>
         </form>

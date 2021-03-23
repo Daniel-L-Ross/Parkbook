@@ -80,7 +80,7 @@ export const ParkSearch = () => {
                     {searchTerms.map(term =>
                         <div className="control">
                             <div className="tags has-addons">
-                                <span className="tag is-medium is-rounded is-success" key={term}>
+                                <span className="tag is-medium is-rounded is-primary" key={term}>
                                     {term.replace(/_/g, ' ')}
                                 </span>
                                 <button className="tag is-delete is-medium is-rounded" id={term} onClick={handleRemoveTerm}></button>

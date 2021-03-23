@@ -81,9 +81,9 @@ export const ParkCard = ({ park }) => {
                 {/* toggle class to set display to hidden */}
                 <div className={hidden ? "hidden" : "park__detail"}>
                     <h4>Features: </h4>
-                    <ul className="features">
-                        {parkFeatures().map(feature => <li key={feature} className="feature">{feature}</li>)}
-                    </ul>
+                    <div className="tags">
+                        {parkFeatures().map(feature => <span key={feature} className="tag is-rounded is-secondary">{feature}</span>)}
+                    </div>
                     <h4>Notes:</h4>
                     <p>{park.notes}</p>
                 </div>

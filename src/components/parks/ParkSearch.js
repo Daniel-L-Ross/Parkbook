@@ -76,9 +76,18 @@ export const ParkSearch = () => {
             <div className="filters">
                 <button onClick={handleClearSearchTerms} className="button is-small">Clear All Filters</button>
                 <h4>Filtering by: </h4>
-                <ul className="filters__list">
-                    {searchTerms.map(term => <li className="filter" key={term}><button className="removeTerm" id={term} onClick={handleRemoveTerm}>X</button>{term.replace(/_/g, ' ')}</li>)}
-                </ul>
+                <div className="field is-grouped is-grouped-multiline">
+                    {searchTerms.map(term =>
+                        <div className="control">
+                            <div className="tags has-addons">
+                                <span className="tag is-medium is-rounded is-success" key={term}>
+                                    {term.replace(/_/g, ' ')}
+                                </span>
+                                <button className="tag is-delete is-medium is-rounded" id={term} onClick={handleRemoveTerm}></button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )

@@ -39,11 +39,11 @@ export const ReviewList = () => {
     }
 
     return (
-        <>
+        <div className="column">
             <section className="reviews">
                 {filteredReviews}
             </section>
             <button onClick={handleAddReview}>Add Review</button>
-        </>
+        </div>
     )
 }

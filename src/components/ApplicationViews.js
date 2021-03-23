@@ -19,10 +19,8 @@ export const ApplicationViews = () => {
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
-                        <div className="columns">
                             <ParkSearch />
                             <ParkList />
-                        </div>
                     </Route>
 
                     <ReviewProvider>

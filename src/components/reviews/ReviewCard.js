@@ -17,7 +17,7 @@ export const ReviewCard = ({ review }) => {
     }
 
     return (
-        <div className="review">
+        <div className="review card">
             <div className="rating">Rating: {review.rating}</div>
             <h3>Review:</h3>
             <p className="review-text">{review.review}</p>

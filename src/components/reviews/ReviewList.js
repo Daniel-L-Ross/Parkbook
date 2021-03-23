@@ -40,7 +40,6 @@ export const ReviewList = () => {
 
     return (
         <>
-            <h2>Reviews List: </h2>
             <section className="reviews">
                 {filteredReviews}
             </section>

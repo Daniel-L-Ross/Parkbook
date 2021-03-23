@@ -15,12 +15,14 @@ import { UserProvider } from "./users/UserProvider"
 
 export const ApplicationViews = () => {
     return (
-        <div className="columns">
+        <>
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
-                        <ParkSearch />
-                        <ParkList />
+                        <div className="columns">
+                            <ParkSearch />
+                            <ParkList />
+                        </div>
                     </Route>
 
                     <ReviewProvider>
@@ -35,7 +37,7 @@ export const ApplicationViews = () => {
                         </Route>
                     </ReviewProvider>
                 </ParkProvider>
-                
+
                 <Route exact path="/favorites">
                     <FavoritesList />
                 </Route>
@@ -50,6 +52,6 @@ export const ApplicationViews = () => {
             <Route path="/login-or-register">
                 <LoginRegister />
             </Route>
-        </div>
+        </>
     )
 }

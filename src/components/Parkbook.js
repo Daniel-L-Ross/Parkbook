@@ -7,7 +7,6 @@ import { ApplicationViews } from "./ApplicationViews"
 export const Parkbook = () => {
     return (
         <>
-            <h1>Welcome to parkbook. </h1>
             <LoginProvider>
                 <NavBar />
                 <ApplicationViews />

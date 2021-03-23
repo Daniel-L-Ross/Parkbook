@@ -66,13 +66,15 @@ export const ParkSearch = () => {
         <div className="column is-one-fifth">
             Park Search:
             <label htmlFor="features">Features:</label>
-            <select onChange={handleAddFilter}>
-                <option value="0">Select a feature</option>
-                {/* iterate over the array of features. use the original key as the value for the search function to grab. Display the pretty feature */}
-                {features.map(feature => <option value={feature.featureName} key={feature.featureName}>{feature.featureDisplay}</option>)}
-            </select>
+            <div className="select is-primary">
+                <select onChange={handleAddFilter}>
+                    <option value="0">Select a feature</option>
+                    {/* iterate over the array of features. use the original key as the value for the search function to grab. Display the pretty feature */}
+                    {features.map(feature => <option value={feature.featureName} key={feature.featureName}>{feature.featureDisplay}</option>)}
+                </select>
+            </div>
             <div className="filters">
-                <button onClick={handleClearSearchTerms}>Clear Filters</button>
+                <button onClick={handleClearSearchTerms} className="button is-small">Clear All Filters</button>
                 <h4>Filtering by: </h4>
                 <ul className="filters__list">
                     {searchTerms.map(term => <li className="filter" key={term}><button className="removeTerm" id={term} onClick={handleRemoveTerm}>X</button>{term.replace(/_/g, ' ')}</li>)}

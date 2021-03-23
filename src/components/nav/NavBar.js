@@ -41,20 +41,22 @@ export const NavBar = () => {
     }
 
     return (
-        <ul className="navbar">
-            <img src={parkbook1} alt="logo"/>
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/">Parkbook</Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" onClick={handleFavoritesLink}>Favorites</Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" onClick={handleUserLink}>User</Link>
-            </li>
-            <li className="navbar__item">
-                {loggedIn ? <Link className="navbar__link" onClick={handleLogout}>Logout</Link> : <Link className="navbar__link" to="/login-or-register">Login</Link>}
-            </li>
-        </ul>
+        <div className="navbar is-fixed-top">
+            <Link to="/">
+                <img src={parkbook1} alt="logo" className="navbar-brand" />
+            </Link>
+            <div className="navbar-menu">
+                <div className="navbar-start">
+                    <Link className="navbar-item" onClick={handleFavoritesLink}>Favorites</Link>
+                    <Link className="navbar-item" onClick={handleUserLink}>User</Link>
+                </div>
+            </div>
+
+            <div className="navbar-end">
+                <div className="buttons">
+                    {loggedIn ? <Link className="button navbar-item" onClick={handleLogout}>Logout</Link> : <Link className="button navbar-item" to="/login-or-register">Login</Link>}
+                </div>
+            </div>
+        </div>
     )
 }

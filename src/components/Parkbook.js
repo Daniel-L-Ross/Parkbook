@@ -9,7 +9,7 @@ export const Parkbook = () => {
         <>
             <LoginProvider>
                 <NavBar />
-                <div className="columns">
+                <div className="columns section">
                     <ApplicationViews />
                 </div>
             </LoginProvider>

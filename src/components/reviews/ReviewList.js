@@ -43,7 +43,7 @@ export const ReviewList = () => {
             <section className="reviews">
                 {filteredReviews}
             </section>
-            <button onClick={handleAddReview}>Add Review</button>
+            <button onClick={handleAddReview} className="button is-primary is-large">Add Review</button>
         </div>
     )
 }

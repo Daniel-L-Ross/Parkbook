@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
   }
 
 .park {
@@ -42,4 +43,8 @@
   padding: .2em;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+.search {
+ border-right: 1px solid gainsboro;
 }

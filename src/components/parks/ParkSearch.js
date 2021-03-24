@@ -63,7 +63,7 @@ export const ParkSearch = () => {
     }
 
     return (
-        <div className="column is-one-fifth">
+        <div className="column is-one-fifth search">
             <label htmlFor="features">Features:</label>
             <div className="select is-primary">
                 <select onChange={handleAddFilter}>

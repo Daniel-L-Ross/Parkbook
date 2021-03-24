@@ -9,6 +9,7 @@ import "./Review.css"
 export const ReviewList = () => {
     const { reviews, getReviews } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
+    const [ park, setPark ] = useState({})
 
     const { parkId } = useParams()
     const history = useHistory()
@@ -24,6 +25,7 @@ export const ReviewList = () => {
             if (currentParkReviews.length === 0) {
                 return <h3>No Reviews</h3>
             } else if (currentParkReviews.length !== 0) {
+                setPark(currentParkReviews[0].park)
                 return currentParkReviews.map(review => <ReviewCard key={review.id} review={review} />)
             }
         }
@@ -40,6 +42,7 @@ export const ReviewList = () => {
 
     return (
         <div className="column">
+            <h1 className="title">Reviews for: {park.park_name}</h1>
             <section className="reviews">
                 {filteredReviews}
             </section>

@@ -46,11 +46,6 @@ export const ParkSearch = () => {
         getParks()
     }
 
-    const handleClearSearchTerms = () => {
-        setSearchTerms([])
-        getParks()
-    }
-
     const handleRemoveTerm = event => {
         const term = event.target.id
         const termIndex = searchArray.indexOf(term)
@@ -73,7 +68,6 @@ export const ParkSearch = () => {
                 </select>
             </div>
             <div className="filters">
-                {/* <button onClick={handleClearSearchTerms} className="button is-small">Clear All Filters</button> */}
                 {searchTerms.length >= 1 ? <h4>Filtering by: </h4> : ""}
                 <div className="field is-grouped is-grouped-multiline">
                     {searchTerms.map(term =>

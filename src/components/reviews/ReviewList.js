@@ -15,11 +15,12 @@ export const ReviewList = () => {
 
     useEffect(() => {
         getReviews()
-    }, [])
+    }, [displayReviews])
 
     // whenever reviews changes, get all the reviews for the current park. Handle empty review array. 
     useEffect(() => {
-        const currentParkReviews = reviews.filter(review => review.parkId === parseInt(parkId))
+        debugger
+        const currentParkReviews = reviews.filter(review => review.parkId === parseInt(reviewPark?.id))
         const displayReviews = () => {
             if (currentParkReviews.length === 0) {
                 return <h3>No Reviews yet...</h3>

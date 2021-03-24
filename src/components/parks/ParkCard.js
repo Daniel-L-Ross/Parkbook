@@ -61,8 +61,8 @@ export const ParkCard = ({ park }) => {
 
 
     const handleReviewsLink = () => {
-        setDisplayReviews(true)
         setReviewPark(park)
+        setDisplayReviews(true)
     }
 
     // controls state variable to display or hide park details info

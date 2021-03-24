@@ -46,11 +46,6 @@ export const ParkSearch = () => {
         getParks()
     }
 
-    const handleClearSearchTerms = () => {
-        setSearchTerms([])
-        getParks()
-    }
-
     const handleRemoveTerm = event => {
         const term = event.target.id
         const termIndex = searchArray.indexOf(term)
@@ -63,21 +58,30 @@ export const ParkSearch = () => {
     }
 
     return (
-        <>
-            Park Search:
-            <label htmlFor="features">Features:</label>
-            <select onChange={handleAddFilter}>
-                <option value="0">Select a feature</option>
-                {/* iterate over the array of features. use the original key as the value for the search function to grab. Display the pretty feature */}
-                {features.map(feature => <option value={feature.featureName} key={feature.featureName}>{feature.featureDisplay}</option>)}
-            </select>
-            <div className="filters">
-                <button onClick={handleClearSearchTerms}>Clear Filters</button>
-                <h4>Filtering by: </h4>
-                <ul className="filters__list">
-                    {searchTerms.map(term => <li className="filter" key={term}><button className="removeTerm" id={term} onClick={handleRemoveTerm}>X</button>{term.replace(/_/g, ' ')}</li>)}
-                </ul>
+        <div className="column is-one-fifth search">
+            <h2 className="subtitle">Search:</h2>
+            <div className="select is-primary">
+                <select onChange={handleAddFilter}>
+                    <option value="0">Select a feature</option>
+                    {/* iterate over the array of features. use the original key as the value for the search function to grab. Display the pretty feature */}
+                    {features.map(feature => <option value={feature.featureName} key={feature.featureName}>{feature.featureDisplay}</option>)}
+                </select>
             </div>
-        </>
+            <div className="filters">
+                {searchTerms.length >= 1 ? <h4>Filtering by: </h4> : ""}
+                <div className="field is-grouped is-grouped-multiline">
+                    {searchTerms.map(term =>
+                        <div className="control">
+                            <div className="tags has-addons">
+                                <span className="tag is-medium is-rounded is-primary" key={term}>
+                                    {term.replace(/_/g, ' ')}
+                                </span>
+                                <button className="tag is-delete is-medium is-rounded" id={term} onClick={handleRemoveTerm}></button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
     )
 }

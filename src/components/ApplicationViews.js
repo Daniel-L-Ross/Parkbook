@@ -19,8 +19,8 @@ export const ApplicationViews = () => {
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
-                        <ParkSearch />
-                        <ParkList />
+                            <ParkSearch />
+                            <ParkList />
                     </Route>
 
                     <ReviewProvider>
@@ -35,7 +35,7 @@ export const ApplicationViews = () => {
                         </Route>
                     </ReviewProvider>
                 </ParkProvider>
-                
+
                 <Route exact path="/favorites">
                     <FavoritesList />
                 </Route>

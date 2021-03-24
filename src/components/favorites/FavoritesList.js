@@ -12,8 +12,8 @@ export const FavoritesList = () => {
 
     return (
         // render all favorited parks for current user at the favorites page
-        <>
-            <h2>Here is the favoritesList</h2>
+        <section>
+            <h1 className="title is-2">Your favorites: </h1>
             <section className="favorites">
                 {
                     userFavorites.map(favorite => {
@@ -21,6 +21,6 @@ export const FavoritesList = () => {
                     })
                 }
             </section>
-        </>
+        </section>
     )
 }

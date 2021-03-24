@@ -4,7 +4,7 @@ import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
 
 export const ReviewForm = () => {
-    const { addReview, getReviewById, updateReview } = useContext(ReviewContext)
+    const { addReview, getReviewById, updateReview, setDisplayReviews } = useContext(ReviewContext)
     const [isLoading, setIsLoading] = useState(true);
     const history = useHistory()
     const { parkId, reviewId } = useParams()
@@ -32,6 +32,7 @@ export const ReviewForm = () => {
         event.preventDefault()
         setIsLoading(true)
         if (reviewId) {
+            setDisplayReviews(true)
             updateReview({
                 id: review.id,
                 parkId: parseInt(parkId),
@@ -41,10 +42,12 @@ export const ReviewForm = () => {
                 timestamp: Date.now(),
                 edited: true
             })
-                .then(() => history.push(`/parks/${parkId}/reviews`))
-        } else {
+                .then(() => {history.push(`/`)})
+
+            } else {
+            setDisplayReviews(true)
             addReview(review)
-                .then(() => history.push(`/parks/${parkId}/reviews`))
+                .then(() => history.push(`/`))
         }
     }
 

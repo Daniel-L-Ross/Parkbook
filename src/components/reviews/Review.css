@@ -1,11 +1,11 @@
 .reviews {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
   } 
 
 .review {
-    flex-basis: 28%;
+    flex: -1 0 auto;
     margin: 1em;
     padding: 1em;
     border: 2px solid #C3D633

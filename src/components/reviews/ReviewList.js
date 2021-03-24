@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { useHistory, useParams } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { userStorageKey } from "../auth/authSettings"
 import { ReviewCard } from "./ReviewCard"
 import { ReviewContext } from "./ReviewProvider"
@@ -7,11 +7,11 @@ import "./Review.css"
 
 
 export const ReviewList = () => {
-    const { reviews, getReviews } = useContext(ReviewContext)
+    const { reviews, getReviews, reviewId, setReviewId, displayReviews, setDisplayReviews } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
-    const [ park, setPark ] = useState({})
+    const [park, setPark] = useState({})
 
-    const { parkId } = useParams()
+    const parkId = park.id
     const history = useHistory()
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export const ReviewList = () => {
         const currentParkReviews = reviews.filter(review => review.parkId === parseInt(parkId))
         const displayReviews = () => {
             if (currentParkReviews.length === 0) {
-                return <h3>No Reviews</h3>
+                return <h3>No Reviews yet...</h3>
             } else if (currentParkReviews.length !== 0) {
                 setPark(currentParkReviews[0].park)
                 return currentParkReviews.map(review => <ReviewCard key={review.id} review={review} />)
@@ -40,13 +40,23 @@ export const ReviewList = () => {
         }
     }
 
+    const handleCloseReviewModal = () => {
+        setDisplayReviews(false)
+    }
+
     return (
-        <div className="column">
-            <h1 className="title">Reviews for: {park.park_name}</h1>
-            <section className="reviews">
-                {filteredReviews}
-            </section>
-            <button onClick={handleAddReview} className="button is-primary is-large">Add Review</button>
+        <div className={displayReviews ? "modal is-active" : "modal"}>
+            <div className="modal-background" onClick={handleCloseReviewModal}></div>
+            <div className="modal-content">
+                <div className="box">
+                <h1 className="title">Reviews for: {park.park_name}</h1>
+                <section className="reviews">
+                    {filteredReviews}
+                </section>
+            <button onClick={handleAddReview} className="button is-primary is-medium">Add Review</button>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close" onClick={handleCloseReviewModal}></button>
         </div>
     )
 }

@@ -4,6 +4,8 @@ export const ReviewContext = createContext()
 
 export const ReviewProvider = props => {
     const [reviews, setReviews] = useState([])
+    const [ reviewId, setReviewId ] = useState(0)
+    const [ displayReviews, setDisplayReviews ] = useState(false)
 
     const getReviews = () => {
         return fetch(`http://localhost:8088/reviews?_expand=park&_expand=user`)
@@ -45,7 +47,7 @@ export const ReviewProvider = props => {
 
     return (
         <ReviewContext.Provider value={{
-            reviews, getReviews, addReview, deleteReview, getReviewById, updateReview
+            reviews, getReviews, addReview, deleteReview, getReviewById, updateReview, reviewId, setReviewId, displayReviews, setDisplayReviews
         }}>
             {props.children}
         </ReviewContext.Provider>

@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
 import { userStorageKey } from "../auth/authSettings"
 import { useHistory } from "react-router"
+import { ReviewContext } from "../reviews/ReviewProvider"
 
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
-    
+    const { setDisplayReviews } = useContext(ReviewContext)
+
     const history = useHistory()
     // Nested address data was returned as a JSON object
     const address = JSON.parse(park.mapped_location.human_address)
@@ -59,7 +61,7 @@ export const ParkCard = ({ park }) => {
 
 
     const handleReviewsLink = () => {
-        history.push(`/parks/${park.id}/reviews`)
+        setDisplayReviews(true)
     }
 
     // controls state variable to display or hide park details info

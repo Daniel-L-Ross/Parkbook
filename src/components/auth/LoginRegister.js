@@ -22,14 +22,15 @@ export const LoginRegister = () => {
     // render login and register togther for styling purposes
     return (
         <div className={displayLogin ? "modal is-active" : "modal"}>
-            <div className="modal-background">
-                <div className="modal-content">
+            <div className="modal-background" onClick={handleCloseModal}></div>
+            <div className="modal-content">
+                <div className="box is-flex is-flex-direction-column">
 
+                    <button className="is-medium is-delete tag is-align-self-flex-end" aria-label="close" onClick={handleCloseModal}></button>
                     <Login />
                     <h2>OR</h2>
                     <Register />
                 </div>
-                <button className="modal-close is-large" aria-label="close" onClick={handleCloseModal}></button>
             </div>
         </div>
     )

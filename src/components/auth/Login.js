@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react"
-import { useHistory } from "react-router-dom"
 import { authApi, userStorageKey } from "./authSettings"
 import { LoginContext } from "./LoginProvider"
 import "./Login.css"
@@ -9,9 +8,7 @@ export const Login = () => {
     const [loginUser, setLoginUser] = useState({ email: "" })
     const [existDialog, setExistDialog] = useState(false)
 
-    const { setLoggedIn } = useContext(LoginContext)
-
-    const history = useHistory()
+    const { setLoggedIn, setDisplayLogin } = useContext(LoginContext)
 
     const handleInputChange = (event) => {
         const newUser = { ...loginUser }
@@ -34,7 +31,8 @@ export const Login = () => {
                 if (exists) {
                     sessionStorage.setItem(userStorageKey, exists.id)
                     setLoggedIn(true)
-                    history.push("/")
+                    setDisplayLogin(false)
+                    setLoginUser({ email: "" })
                 } else {
                     setExistDialog(true)
                 }

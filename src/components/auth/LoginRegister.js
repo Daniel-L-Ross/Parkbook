@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { Login } from "./Login"
 import { Register } from "./Register"
 import { LoginContext } from "./LoginProvider"
+import { userStorageKey } from "./authSettings"
 import "./Login.css"
 
 
@@ -11,6 +12,11 @@ export const LoginRegister = () => {
 
     const handleCloseModal = () => {
         setDisplayLogin(false)
+    }
+
+    if (sessionStorage.getItem(userStorageKey)) {
+        setDisplayLogin(false)
+        console.log("working")
     }
 
     // render login and register togther for styling purposes

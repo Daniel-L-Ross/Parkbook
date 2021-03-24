@@ -70,19 +70,19 @@ export const Register = () => {
             <form className="form--login" onSubmit={handleRegister}>
                 <h2 className="h3 mb-3 font-weight-normal">Register for Parkbook</h2>
                 <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
+                    <label htmlFor="firstName" className="label"> First Name </label>
                     <input type="text" name="firstName" id="firstName" className="form-control" placeholder="First name" required autoFocus value={registerUser.firstName} onChange={handleInputChange} />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
+                    <label htmlFor="lastName" className="label"> Last Name </label>
                     <input type="text" name="lastName" id="lastName" className="form-control" placeholder="Last name" required value={registerUser.lastName} onChange={handleInputChange} />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
+                    <label htmlFor="inputEmail" className="label"> Email address </label>
                     <input type="email" name="email" id="email" className="form-control" placeholder="Email address" required value={registerUser.email} onChange={handleInputChange} />
                 </fieldset>
                 <fieldset>
-                    <button type="submit"> Sign in </button>
+                    <button type="submit" className="button is-link"> Sign in </button>
                 </fieldset>
             </form>
         </main>

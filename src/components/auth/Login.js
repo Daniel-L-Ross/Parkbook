@@ -45,13 +45,13 @@ export const Login = () => {
         <main className="container--login" style={{ textAlign: "center" }}>
             <dialog className="dialog dialog--auth" open={existDialog}>
                 <div>User does not exist</div>
-                <button className="button--close" onClick={e => setExistDialog(false)}>Close</button>
+                <button className="button" onClick={e => setExistDialog(false)}>Close</button>
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
                     <h2 className="h3 mb-3 font-weight-normal">Sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
+                        <label htmlFor="inputEmail" className="label"> Email address </label>
                         <input type="email"
                             id="email"
                             className="form-control"
@@ -61,7 +61,7 @@ export const Login = () => {
                             onChange={handleInputChange} />
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
+                        <button type="submit" className="button is-link">
                             Sign in
                         </button>
                     </fieldset>

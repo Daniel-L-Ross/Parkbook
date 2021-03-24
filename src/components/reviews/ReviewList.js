@@ -7,11 +7,10 @@ import "./Review.css"
 
 
 export const ReviewList = () => {
-    const { reviews, getReviews, reviewId, setReviewId, displayReviews, setDisplayReviews } = useContext(ReviewContext)
+    const { reviews, getReviews, reviewId, setReviewId, displayReviews, setDisplayReviews, reviewPark } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
-    const [park, setPark] = useState({})
+    const [parkId, setParkId] = useState(0)
 
-    const parkId = park.id
     const history = useHistory()
 
     useEffect(() => {
@@ -24,8 +23,8 @@ export const ReviewList = () => {
         const displayReviews = () => {
             if (currentParkReviews.length === 0) {
                 return <h3>No Reviews yet...</h3>
+
             } else if (currentParkReviews.length !== 0) {
-                setPark(currentParkReviews[0].park)
                 return currentParkReviews.map(review => <ReviewCard key={review.id} review={review} />)
             }
         }
@@ -49,7 +48,7 @@ export const ReviewList = () => {
             <div className="modal-background" onClick={handleCloseReviewModal}></div>
             <div className="modal-content">
                 <div className="box">
-                <h1 className="title">Reviews for: {park.park_name}</h1>
+                <h1 className="title">Reviews for: {reviewPark?.park_name}</h1>
                 <section className="reviews">
                     {filteredReviews}
                 </section>

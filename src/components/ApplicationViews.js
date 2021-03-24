@@ -8,7 +8,6 @@ import { ParkSearch } from "./parks/ParkSearch"
 import { ReviewProvider } from "./reviews/ReviewProvider"
 import { ReviewList } from "./reviews/ReviewList"
 import { ReviewForm } from "./reviews/ReviewForm"
-import { LoginRegister } from "./auth/LoginRegister"
 import { UserProfile } from "./users/UserProfile"
 import { UserProvider } from "./users/UserProvider"
 
@@ -47,9 +46,6 @@ export const ApplicationViews = () => {
                 </Route>
             </UserProvider>
 
-            <Route path="/login-or-register">
-                <LoginRegister />
-            </Route>
         </>
     )
 }

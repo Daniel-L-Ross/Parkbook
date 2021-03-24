@@ -3,6 +3,7 @@ import { LoginProvider } from "./auth/LoginProvider"
 import { NavBar } from "./nav/NavBar"
 import { LoginRegister } from "./auth/LoginRegister"
 import { ApplicationViews } from "./ApplicationViews"
+import "../css/parkbook.css"
 
 
 export const Parkbook = () => {

@@ -6,7 +6,7 @@ import parkbook1 from "../../images/parkbook1.png"
 import "./NavBar.css"
 
 export const NavBar = () => {
-    const { loggedIn, setLoggedIn } = useContext(LoginContext)
+    const { loggedIn, setLoggedIn, setDisplayLogin } = useContext(LoginContext)
     const history = useHistory()
 
     // NavBar renders on every page so it checks to see if user is logged in, then sets the state variable
@@ -40,6 +40,10 @@ export const NavBar = () => {
         history.push("/")
     }
 
+    const handleDisplayLogin = () => {
+        setDisplayLogin(true)
+    }
+
     return (
         <div className="navbar is-fixed-top">
             <Link to="/">
@@ -54,7 +58,7 @@ export const NavBar = () => {
 
             <div className="navbar-end">
                 <div className="buttons">
-                    {loggedIn ? <Link className="button navbar-item" onClick={handleLogout}>Logout</Link> : <Link className="button navbar-item" to="/login-or-register">Login</Link>}
+                    {loggedIn ? <button className="button navbar-item" onClick={handleLogout}>Logout</button> : <button className="button navbar-item" onClick={handleDisplayLogin}>Login</button>}
                 </div>
             </div>
         </div>

@@ -1,0 +1,5 @@
+.dividerLine {
+    border-top: 1px solid gainsboro;
+    width: 30%;
+    height: 0px;
+}

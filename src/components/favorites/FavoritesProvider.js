@@ -8,15 +8,13 @@ export const FavoriteProvider = (props) => {
     // handle state of currentUser favorites
     const [userFavorites, setUserFavorites] = useState([])
 
-    const currentUserId = parseInt(sessionStorage.parkbook_user_id)
-
     // get favorites by userId. Expand parks. 
     const getUserFavorites = () => {
-            return fetch(`http://localhost:8088/favorites/?userId=${currentUserId}&_expand=park`)
+            return fetch(`http://localhost:8088/favorites/?userId=${sessionStorage.getItem(userStorageKey)}&_expand=park`)
             .then(res => res.json())
-            .then((userFavorites) => {
+            .then((favorites) => {
             if (sessionStorage.getItem(userStorageKey)) {
-                setUserFavorites(userFavorites)
+                setUserFavorites(favorites)
             } else {
                 setUserFavorites([])
             }

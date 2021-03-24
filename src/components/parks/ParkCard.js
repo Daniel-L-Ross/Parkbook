@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
 import { userStorageKey } from "../auth/authSettings"
 import { useHistory } from "react-router"
@@ -6,6 +6,7 @@ import { useHistory } from "react-router"
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
+    
     const history = useHistory()
     // Nested address data was returned as a JSON object
     const address = JSON.parse(park.mapped_location.human_address)

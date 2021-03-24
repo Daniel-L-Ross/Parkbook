@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react"
 import { authApi, userStorageKey } from "./authSettings"
 import { LoginContext } from "./LoginProvider"
 import "./Login.css"
+import { Link } from "react-router-dom"
 
 
 export const Login = () => {
@@ -47,25 +48,25 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h2 className="h3 mb-3 font-weight-normal">Sign in</h2>
-                    <fieldset>
-                        <label htmlFor="inputEmail" className="label"> Email address </label>
-                        <input type="email"
-                            id="email"
-                            className="form-control"
-                            placeholder="Email address"
-                            required autoFocus
-                            value={loginUser.email}
-                            onChange={handleInputChange} />
+                    <h2 className="title">Sign in</h2>
+                    <fieldset className="field">
+                        <label htmlFor="inputEmail" className="label"> Email </label>
+                        <div className="control">
+                            <input type="email"
+                                id="email"
+                                className="form-control"
+                                placeholder="Email address"
+                                required autoFocus
+                                value={loginUser.email}
+                                onChange={handleInputChange} />
+                        </div>
                     </fieldset>
-                    <fieldset>
+                    <fieldset className="field">
                         <button type="submit" className="button is-link">
                             Sign in
                         </button>
                     </fieldset>
                 </form>
-            </section>
-            <section className="link--register">
             </section>
         </main>
     )

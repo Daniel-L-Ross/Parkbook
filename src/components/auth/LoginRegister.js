@@ -28,7 +28,11 @@ export const LoginRegister = () => {
 
                     <button className="is-medium is-delete tag is-align-self-flex-end" aria-label="close" onClick={handleCloseModal}></button>
                     <Login />
-                    <h2>OR</h2>
+                    <div className="is-flex is-align-items-center is-justify-content-center m-6">
+                        <span className="dividerLine"></span>
+                        <h3 className="has-text-centered ml-2 mr-2">OR</h3>
+                        <span className="dividerLine"></span>
+                    </div>
                     <Register />
                 </div>
             </div>

@@ -68,20 +68,20 @@ export const Register = () => {
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h2 className="h3 mb-3 font-weight-normal">Register for Parkbook</h2>
-                <fieldset>
+                <h2 className="title">Register for Parkbook</h2>
+                <fieldset className="field">
                     <label htmlFor="firstName" className="label"> First Name </label>
                     <input type="text" name="firstName" id="firstName" className="form-control" placeholder="First name" required autoFocus value={registerUser.firstName} onChange={handleInputChange} />
                 </fieldset>
-                <fieldset>
+                <fieldset className="field">
                     <label htmlFor="lastName" className="label"> Last Name </label>
                     <input type="text" name="lastName" id="lastName" className="form-control" placeholder="Last name" required value={registerUser.lastName} onChange={handleInputChange} />
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail" className="label"> Email address </label>
+                <fieldset className="field">
+                    <label htmlFor="inputEmail" className="label">Email</label>
                     <input type="email" name="email" id="email" className="form-control" placeholder="Email address" required value={registerUser.email} onChange={handleInputChange} />
                 </fieldset>
-                <fieldset>
+                <fieldset className="field">
                     <button type="submit" className="button is-link"> Sign in </button>
                 </fieldset>
             </form>

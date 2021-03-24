@@ -9,7 +9,6 @@ import "./Review.css"
 export const ReviewList = () => {
     const { reviews, getReviews, reviewId, setReviewId, displayReviews, setDisplayReviews, reviewPark } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
-    const [parkId, setParkId] = useState(0)
 
     const history = useHistory()
 
@@ -34,7 +33,8 @@ export const ReviewList = () => {
 
     const handleAddReview = () => {
         if (sessionStorage.getItem(userStorageKey)) {
-            history.push(`/parks/${parkId}/reviews/create`)
+            history.push(`/parks/${reviewPark.id}/reviews/create`)
+            setDisplayReviews(false)
         } else {
             window.alert("Please log in to add a review.")
         }

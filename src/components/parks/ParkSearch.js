@@ -64,7 +64,7 @@ export const ParkSearch = () => {
 
     return (
         <div className="column is-one-fifth search">
-            <label htmlFor="features">Features:</label>
+            <h2 className="subtitle">Search:</h2>
             <div className="select is-primary">
                 <select onChange={handleAddFilter}>
                     <option value="0">Select a feature</option>
@@ -73,8 +73,8 @@ export const ParkSearch = () => {
                 </select>
             </div>
             <div className="filters">
-                <button onClick={handleClearSearchTerms} className="button is-small">Clear All Filters</button>
-                <h4>Filtering by: </h4>
+                {/* <button onClick={handleClearSearchTerms} className="button is-small">Clear All Filters</button> */}
+                {searchTerms.length >= 1 ? <h4>Filtering by: </h4> : ""}
                 <div className="field is-grouped is-grouped-multiline">
                     {searchTerms.map(term =>
                         <div className="control">

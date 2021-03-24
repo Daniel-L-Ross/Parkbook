@@ -46,7 +46,7 @@ export const ParkList = () => {
 
     return (
         <div className="column">
-            {searchTerms.length >= 1 ? <h1 className="title has-text-centered">Search Results</h1> : <h1 className="title has-text-centered">Nashville Parks</h1>}
+            {searchTerms.length >= 1 ? <h1 className="title has-text-centered">Search Results</h1> : <h1 className="title has-text-centered">Davidson County Parks</h1>}
             <section className="parks">
                 {
                     filteredParks.map(park => {

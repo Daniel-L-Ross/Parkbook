@@ -11,10 +11,18 @@ export const UserProfile = () => {
     }, [])
 
     return (
-        <>
-            <h1>User Profile</h1>
-            <p>Hi, {user.name}.</p>
-            <div>Your email: {user.email}</div>
-        </>
+        <div className="column">
+            <div className="card">
+                <div className="card-header">
+
+                    <h1 className="card-header-title is-centered">User Profile</h1>
+                </div>
+                <div className="card-content">
+
+                    <p>Hi, {user.name}.</p>
+                    <div>Your email: {user.email}</div>
+                </div>
+            </div>
+        </div>
     )
 }

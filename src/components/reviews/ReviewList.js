@@ -3,18 +3,19 @@ import { useHistory } from "react-router-dom"
 import { userStorageKey } from "../auth/authSettings"
 import { ReviewCard } from "./ReviewCard"
 import { ReviewContext } from "./ReviewProvider"
+import { ReviewForm } from "./ReviewForm"
 import "./Review.css"
 
 
 export const ReviewList = () => {
-    const { reviews, getReviews, reviewId, setReviewId, displayReviews, setDisplayReviews, reviewPark } = useContext(ReviewContext)
+    const { reviews, getReviews, reviewId, setReviewId, displayReviews, setDisplayReviews, reviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
 
     const history = useHistory()
 
     useEffect(() => {
         getReviews()
-    }, [displayReviews])
+    }, [reviewPark])
 
     // whenever reviews changes, get all the reviews for the current park. Handle empty review array. 
     useEffect(() => {
@@ -32,8 +33,7 @@ export const ReviewList = () => {
 
     const handleAddReview = () => {
         if (sessionStorage.getItem(userStorageKey)) {
-            history.push(`/parks/${reviewPark.id}/reviews/create`)
-            setDisplayReviews(false)
+            setDisplayReviewForm(true)
         } else {
             window.alert("Please log in to add a review.")
         }
@@ -52,10 +52,13 @@ export const ReviewList = () => {
                 <section className="reviews">
                     {filteredReviews}
                 </section>
-            <button onClick={handleAddReview} className="button is-primary is-medium">Add Review</button>
+            <button onClick={handleAddReview} className={ displayReviewForm ? "hidden" : "button is-primary is-medium"}>Add Review</button>
+            <div className={displayReviewForm ? "" : "hidden"}>
+                <ReviewForm />
+            </div>
                 </div>
             </div>
-            <button class="modal-close is-large" aria-label="close" onClick={handleCloseReviewModal}></button>
+            <button className="modal-close is-large" aria-label="close" onClick={handleCloseReviewModal}></button>
         </div>
     )
 }

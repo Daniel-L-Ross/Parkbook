@@ -7,9 +7,12 @@ export const ReviewProvider = props => {
     const [ reviewId, setReviewId ] = useState(0)
     const [ displayReviews, setDisplayReviews ] = useState(false)
     const [ reviewPark, setReviewPark ] = useState({})
+    const [ displayReviewForm, setDisplayReviewForm ] = useState(false)
+
 
     const getReviews = () => {
-        return fetch(`http://localhost:8088/reviews?_expand=park&_expand=user`)
+        debugger
+        return fetch(`http://localhost:8088/reviews/?_expand=park&_expand=user`)
             .then(res => res.json())
             .then(setReviews)
     }
@@ -48,7 +51,8 @@ export const ReviewProvider = props => {
 
     return (
         <ReviewContext.Provider value={{
-            reviews, getReviews, addReview, deleteReview, getReviewById, updateReview, reviewId, setReviewId, displayReviews, setDisplayReviews, reviewPark, setReviewPark
+            reviews, getReviews, addReview, deleteReview, getReviewById, updateReview, reviewId, setReviewId, 
+            displayReviews, setDisplayReviews, reviewPark, setReviewPark, displayReviewForm, setDisplayReviewForm 
         }}>
             {props.children}
         </ReviewContext.Provider>

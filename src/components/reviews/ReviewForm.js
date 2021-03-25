@@ -4,14 +4,14 @@ import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
 
 export const ReviewForm = () => {
-    const { addReview, getReviewById, updateReview, setDisplayReviews } = useContext(ReviewContext)
+    const { addReview, getReviewById, updateReview, setDisplayReviewForm, reviewPark  } = useContext(ReviewContext)
     const [isLoading, setIsLoading] = useState(true);
-    const history = useHistory()
-    const { parkId, reviewId } = useParams()
+
+    const { reviewId } = useParams()
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const [review, setReview] = useState({
-        parkId: parseInt(parkId),
+        parkId: reviewPark.id,
         userId: currentUserId,
         rating: 0,
         review: "",
@@ -29,25 +29,24 @@ export const ReviewForm = () => {
     }
 
     const handleSaveReview = event => {
+        debugger
         event.preventDefault()
         setIsLoading(true)
         if (reviewId) {
-            setDisplayReviews(true)
             updateReview({
                 id: review.id,
-                parkId: parseInt(parkId),
+                parkId: reviewPark.id,
                 userId: currentUserId,
                 rating: review.rating,
                 review: review.review,
                 timestamp: Date.now(),
                 edited: true
             })
-                .then(() => {history.push(`/`)})
+            setDisplayReviewForm(false)
 
             } else {
-            setDisplayReviews(true)
             addReview(review)
-                .then(() => history.push(`/`))
+            setDisplayReviewForm(false)
         }
     }
 
@@ -88,6 +87,10 @@ export const ReviewForm = () => {
         return options
     }
 
+    const handleCancelReview = () => {
+        setDisplayReviewForm(false)
+    }
+
     return (
         <form className="reviewForm" onSubmit={handleSaveReview}>
             <h2 className="reviewForm__title">{formTitle()}</h2>
@@ -110,6 +113,7 @@ export const ReviewForm = () => {
                 disabled={isLoading}>
                 {buttonText()}
             </button>
+            <button onClick={handleCancelReview}>Cancel</button>
         </form>
     )
 }

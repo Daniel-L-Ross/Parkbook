@@ -30,6 +30,7 @@ export const ReviewProvider = props => {
             },
             body: JSON.stringify(reviewObj)
         })
+        .then(getReviews)
     }
 
     const updateReview = reviewObj => {

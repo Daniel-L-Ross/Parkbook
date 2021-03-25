@@ -11,7 +11,7 @@ export const ReviewProvider = props => {
 
 
     const getReviews = () => {
-        return fetch(`http://localhost:8088/reviews/?_expand=park&_expand=user`)
+        return fetch(`http://localhost:8088/reviews/?_expand=user`)
             .then(res => res.json())
             .then(setReviews)
     }

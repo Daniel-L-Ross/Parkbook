@@ -108,6 +108,7 @@ export const ReviewForm = () => {
     const handleCancelReview = () => {
         setDisplayReviewForm(false)
         setReviewId(0)
+        setIsLoading(true)
         setReview({
             parkId: reviewPark.id,
             userId: currentUserId,

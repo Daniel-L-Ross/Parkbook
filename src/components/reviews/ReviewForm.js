@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
-import { useHistory, useParams } from "react-router-dom"
 import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
 
 export const ReviewForm = () => {
-    const { addReview, getReviewById, updateReview, setDisplayReviewForm, reviewPark  } = useContext(ReviewContext)
+    const { addReview, getReviewById, updateReview, setDisplayReviewForm, reviewPark, reviewId, setReviewId  } = useContext(ReviewContext)
     const [isLoading, setIsLoading] = useState(true);
 
-    const { reviewId } = useParams()
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
     const [review, setReview] = useState({
@@ -29,10 +27,10 @@ export const ReviewForm = () => {
     }
 
     const handleSaveReview = event => {
-        debugger
         event.preventDefault()
         setIsLoading(true)
-        if (reviewId) {
+        
+        if (reviewId > 0) {
             updateReview({
                 id: review.id,
                 parkId: reviewPark.id,
@@ -43,15 +41,33 @@ export const ReviewForm = () => {
                 edited: true
             })
             setDisplayReviewForm(false)
+            setReview({
+                parkId: reviewPark.id,
+                userId: currentUserId,
+                rating: 0,
+                review: "",
+                timestamp: Date.now(),
+                edited: false
+            })
 
             } else {
+
             addReview(review)
             setDisplayReviewForm(false)
+            setReviewId(0)
+            setReview({
+                parkId: reviewPark.id,
+                userId: currentUserId,
+                rating: 0,
+                review: "",
+                timestamp: Date.now(),
+                edited: false
+            })
         }
     }
 
     const formTitle = () => {
-        if (reviewId) {
+        if (reviewId > 0) {
             return "Edit Review"
         } else {
             return "New Review"
@@ -59,7 +75,7 @@ export const ReviewForm = () => {
     }
 
     const buttonText = () => {
-        if (reviewId) {
+        if (reviewId > 0) {
             return "Confirm Changes"
         } else {
             return "Submit Review"
@@ -67,7 +83,7 @@ export const ReviewForm = () => {
     }
 
     useEffect(() => {
-        if (reviewId) {
+        if (reviewId > 0) {
             getReviewById(reviewId)
                 .then(oldReview => {
                     setReview(oldReview)
@@ -76,7 +92,7 @@ export const ReviewForm = () => {
         } else {
             setIsLoading(false)
         }
-    }, [])
+    }, [reviewId])
 
 
     const ratingOptions = () => {
@@ -89,6 +105,15 @@ export const ReviewForm = () => {
 
     const handleCancelReview = () => {
         setDisplayReviewForm(false)
+        setReviewId(0)
+        setReview({
+            parkId: reviewPark.id,
+            userId: currentUserId,
+            rating: 0,
+            review: "",
+            timestamp: Date.now(),
+            edited: false
+        })
     }
 
     return (

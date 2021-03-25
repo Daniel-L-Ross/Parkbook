@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { ReviewContext } from "./ReviewProvider"
 
 export const ReviewCard = ({ review }) => {
-    const { deleteReview, reviewId, setReviewId, displayReviews, setDisplayReviews } = useContext(ReviewContext)
+    const { deleteReview, setDisplayReviewForm, setReviewId } = useContext(ReviewContext)
     const history = useHistory()
 
 
@@ -19,9 +19,9 @@ export const ReviewCard = ({ review }) => {
     }
     
     const handleClickEdit = () => {
-        setDisplayReviews(false)
-        history.push(`/parks/${review.parkId}/reviews/${review.id}/edit`)
-    }
+        setDisplayReviewForm(true)
+        setReviewId(review.id)
+        }
 
     return (
         <div className="review card">

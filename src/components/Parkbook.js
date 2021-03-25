@@ -13,13 +13,15 @@ export const Parkbook = () => {
         <>
             <LoginProvider>
                 <ReviewProvider>
-                <NavBar />
-                <div className="columns section">
-                    <ApplicationViews />
-                </div>
+                    <NavBar />
+                    <div className="columns section">
+                        <ApplicationViews />
+                    </div>
 
-                <LoginRegister />
-                
+                    {/* modal that appears onClick */}
+                    <LoginRegister />
+
+                    {/* modal that appears onClick */}
                     <ReviewList />
                 </ReviewProvider>
             </LoginProvider>

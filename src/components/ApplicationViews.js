@@ -18,21 +18,10 @@ export const ApplicationViews = () => {
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
-                            <ParkSearch />
-                            <ParkList />
+                        <ParkSearch />
+                        <ParkList />
                     </Route>
 
-                    <ReviewProvider>
-                        <Route exact path="/parks/:parkId(\d+)/reviews">
-                            <ReviewList />
-                        </Route>
-                        <Route path="/parks/:parkId(\d+)/reviews/create">
-                            <ReviewForm />
-                        </Route>
-                        <Route path="/parks/:parkId(\d+)/reviews/:reviewId(\d+)/edit">
-                            <ReviewForm />
-                        </Route>
-                    </ReviewProvider>
                 </ParkProvider>
 
                 <Route exact path="/favorites">
@@ -45,7 +34,6 @@ export const ApplicationViews = () => {
                     <UserProfile />
                 </Route>
             </UserProvider>
-
         </>
     )
 }

@@ -146,7 +146,7 @@ export const ReviewForm = () => {
                 </div>
             </fieldset>
             <div className="field is-grouped">
-                <div class="control">
+                <div className="control">
                     <button type="submit"
                         disabled={isLoading}
                         className="button is-primary">

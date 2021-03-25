@@ -5,9 +5,6 @@ import { FavoritesList } from "./favorites/FavoritesList"
 import { ParkProvider } from "./parks/ParkProvider"
 import { ParkList } from "./parks/ParkList"
 import { ParkSearch } from "./parks/ParkSearch"
-import { ReviewProvider } from "./reviews/ReviewProvider"
-import { ReviewList } from "./reviews/ReviewList"
-import { ReviewForm } from "./reviews/ReviewForm"
 import { UserProfile } from "./users/UserProfile"
 import { UserProvider } from "./users/UserProvider"
 
@@ -18,21 +15,10 @@ export const ApplicationViews = () => {
             <FavoriteProvider>
                 <ParkProvider>
                     <Route exact path="/">
-                            <ParkSearch />
-                            <ParkList />
+                        <ParkSearch />
+                        <ParkList />
                     </Route>
 
-                    <ReviewProvider>
-                        <Route exact path="/parks/:parkId(\d+)/reviews">
-                            <ReviewList />
-                        </Route>
-                        <Route path="/parks/:parkId(\d+)/reviews/create">
-                            <ReviewForm />
-                        </Route>
-                        <Route path="/parks/:parkId(\d+)/reviews/:reviewId(\d+)/edit">
-                            <ReviewForm />
-                        </Route>
-                    </ReviewProvider>
                 </ParkProvider>
 
                 <Route exact path="/favorites">
@@ -45,7 +31,6 @@ export const ApplicationViews = () => {
                     <UserProfile />
                 </Route>
             </UserProvider>
-
         </>
     )
 }

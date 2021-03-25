@@ -9,7 +9,10 @@ export const ParkSearch = () => {
     // get parks after initial render. setSearchterms to empty on component unmount
     useEffect(() => {
         getParks()
-        return setSearchTerms([])
+        return () => {
+            setSearchTerms([])
+            
+        }
     }, [])
 
 
@@ -44,6 +47,7 @@ export const ParkSearch = () => {
         searchArray.push(event.target.value)
         setSearchTerms(searchArray)
         getParks()
+        event.target.value = 0
     }
 
     const handleRemoveTerm = event => {
@@ -59,7 +63,7 @@ export const ParkSearch = () => {
 
     return (
         <div className="column is-one-fifth search">
-            <h2 className="subtitle">Search:</h2>
+            <h2 className="subtitle">Search by feature:</h2>
             <div className="select is-primary">
                 <select onChange={handleAddFilter}>
                     <option value="0">Select a feature</option>

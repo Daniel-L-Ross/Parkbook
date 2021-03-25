@@ -1,10 +1,8 @@
 import React, { useContext } from "react"
-import { useHistory } from "react-router-dom"
 import { ReviewContext } from "./ReviewProvider"
 
 export const ReviewCard = ({ review }) => {
     const { deleteReview, setDisplayReviewForm, setReviewId } = useContext(ReviewContext)
-    const history = useHistory()
 
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)

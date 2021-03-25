@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { userStorageKey } from "../auth/authSettings"
 import { ReviewCard } from "./ReviewCard"
@@ -8,10 +8,10 @@ import "./Review.css"
 
 
 export const ReviewList = () => {
-    const { reviews, getReviews, reviewId, setReviewId, displayReviews, setDisplayReviews, reviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
+    const { reviews, getReviews, displayReviews, setDisplayReviews, reviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
 
-    const history = useHistory()
+    const scrollPoint = useRef()
 
     useEffect(() => {
         getReviews()
@@ -34,6 +34,7 @@ export const ReviewList = () => {
     const handleAddReview = () => {
         if (sessionStorage.getItem(userStorageKey)) {
             setDisplayReviewForm(true)
+            scrollPoint.current.scrollIntoView({ behavior: 'smooth' })
         } else {
             window.alert("Please log in to add a review.")
         }
@@ -48,14 +49,17 @@ export const ReviewList = () => {
             <div className="modal-background" onClick={handleCloseReviewModal}></div>
             <div className="modal-content">
                 <div className="box">
-                <h1 className="title">Reviews for: {reviewPark?.park_name}</h1>
-                <section className="reviews">
-                    {filteredReviews}
-                </section>
-            <button onClick={handleAddReview} className={ displayReviewForm ? "hidden" : "button is-primary is-medium"}>Add Review</button>
-            <div className={displayReviewForm ? "" : "hidden"}>
-                <ReviewForm />
-            </div>
+                    <h2 className="title  is-2 has-text-centered">Reviews for:</h2>
+                    <h2 className="title is-1 has-text-centered">{reviewPark?.park_name}</h2>
+
+                    <section className="reviews">
+                        {filteredReviews}
+                    </section>
+                    <button onClick={handleAddReview} className={displayReviewForm ? "hidden" : "button is-primary is-medium "}>Add Review</button>
+                    <div className={displayReviewForm ? "" : "hidden"}>
+                        <ReviewForm />
+                    </div>
+                    <div ref={scrollPoint}></div>
                 </div>
             </div>
             <button className="modal-close is-large" aria-label="close" onClick={handleCloseReviewModal}></button>

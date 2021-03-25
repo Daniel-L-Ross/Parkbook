@@ -61,7 +61,6 @@ export const ParkCard = ({ park }) => {
 
 
     const handleReviewsLink = () => {
-        debugger
         setReviewPark(park)
         setDisplayReviews(true)
     }

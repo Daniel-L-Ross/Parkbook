@@ -3,7 +3,7 @@ import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
 
 export const ReviewForm = () => {
-    const { addReview, getReviewById, updateReview, setDisplayReviewForm, reviewPark, reviewId, setReviewId  } = useContext(ReviewContext)
+    const { addReview, getReviewById, updateReview, setDisplayReviewForm, reviewPark, reviewId, setReviewId } = useContext(ReviewContext)
     const [isLoading, setIsLoading] = useState(true);
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
@@ -29,7 +29,7 @@ export const ReviewForm = () => {
     const handleSaveReview = event => {
         event.preventDefault()
         setIsLoading(true)
-        
+
         if (reviewId > 0) {
             updateReview({
                 id: review.id,
@@ -50,7 +50,7 @@ export const ReviewForm = () => {
                 edited: false
             })
 
-            } else {
+        } else {
 
             addReview(review)
             setDisplayReviewForm(false)
@@ -118,27 +118,33 @@ export const ReviewForm = () => {
 
     return (
         <form className="reviewForm" onSubmit={handleSaveReview}>
-            <h2 className="reviewForm__title">{formTitle()}</h2>
-            <fieldset>
+            <h2 className="title is-4 has-text-centered">{formTitle()}</h2>
+            <fieldset className="field">
                 <div className="form-group">
-                    <p>Please rate the park from 1-5, with 1 being the lowest.</p>
+                    <label className="label">Please rate the park from 1-5, with 1 being the lowest.</label>
 
-                    <select value={review.rating} id="rating" onChange={handleControlledInputChange} required >
+                    <select value={review.rating} id="rating" className="select" onChange={handleControlledInputChange} required >
                         <option value={0}>Rating...</option>
                         {ratingOptions()}
                     </select>
                 </div>
             </fieldset>
-            <fieldset>
+            <fieldset className="field">
                 <div className="form-group">
-                    <textarea type="text" id="review" placeholder="Add your review here" value={review.review} onChange={handleControlledInputChange} required ></textarea>
+                    <label className="label">Your Review</label>
+                    <textarea type="text" id="review" placeholder="Add your review here" value={review.review} className="textarea" onChange={handleControlledInputChange} required ></textarea>
                 </div>
             </fieldset>
-            <button type="submit"
-                disabled={isLoading}>
-                {buttonText()}
-            </button>
-            <button onClick={handleCancelReview}>Cancel</button>
+            <div className="field is-grouped">
+                <div class="control">
+                    <button type="submit"
+                        disabled={isLoading}
+                        className="button is-primary">
+                        {buttonText()}
+                    </button>
+                    <button onClick={handleCancelReview} className="button is-warning">Cancel</button>
+                </div>
+            </div>
         </form>
     )
 }

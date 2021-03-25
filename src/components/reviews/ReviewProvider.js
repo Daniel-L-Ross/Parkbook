@@ -11,7 +11,6 @@ export const ReviewProvider = props => {
 
 
     const getReviews = () => {
-        debugger
         return fetch(`http://localhost:8088/reviews/?_expand=park&_expand=user`)
             .then(res => res.json())
             .then(setReviews)

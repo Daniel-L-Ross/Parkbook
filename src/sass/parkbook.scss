@@ -26,5 +26,10 @@ $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 // Import only what you need from Bulma
 @import "../../node_modules/bulma/bulma.sass"

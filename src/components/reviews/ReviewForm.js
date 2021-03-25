@@ -94,7 +94,7 @@ export const ReviewForm = () => {
         } else {
             setIsLoading(false)
         }
-    }, [reviewId])
+    }, [reviewId, displayReviewForm])
 
 
     const ratingOptions = () => {

@@ -7,7 +7,7 @@ import "./Review.css"
 
 
 export const ReviewList = () => {
-    const { reviews, getReviews, displayReviews, setDisplayReviews, reviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
+    const { reviews, getReviews, setReviews, displayReviews, setDisplayReviews, reviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
 
     useEffect(() => {

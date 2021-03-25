@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { ReviewContext } from "./ReviewProvider"
 import "./Review.css"
 
 export const ReviewForm = () => {
-    const { addReview, getReviewById, updateReview, setDisplayReviewForm, reviewPark, reviewId, setReviewId } = useContext(ReviewContext)
+    const { addReview, getReviewById, updateReview, setDisplayReviewForm, displayReviewForm, reviewPark, reviewId, setReviewId } = useContext(ReviewContext)
     const [isLoading, setIsLoading] = useState(true);
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
+
+    const scrollPoint = useRef()
 
     const [review, setReview] = useState({
         parkId: reviewPark.id,
@@ -115,7 +117,13 @@ export const ReviewForm = () => {
             edited: false
         })
     }
-
+    
+    useEffect(() => {
+        if (displayReviewForm){
+            scrollPoint.current.focus()
+        }
+    }, [displayReviewForm])
+    
     return (
         <form className="reviewForm" onSubmit={handleSaveReview}>
             <h2 className="title is-4 has-text-centered">{formTitle()}</h2>
@@ -142,7 +150,7 @@ export const ReviewForm = () => {
                         className="button is-primary">
                         {buttonText()}
                     </button>
-                    <button onClick={handleCancelReview} className="button is-warning">Cancel</button>
+                    <button ref={scrollPoint} onClick={handleCancelReview} className="button is-warning">Cancel</button>
                 </div>
             </div>
         </form>

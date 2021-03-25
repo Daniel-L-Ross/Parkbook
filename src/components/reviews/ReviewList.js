@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react"
-import { useHistory } from "react-router-dom"
+import React, { useContext, useEffect, useState } from "react"
 import { userStorageKey } from "../auth/authSettings"
 import { ReviewCard } from "./ReviewCard"
 import { ReviewContext } from "./ReviewProvider"
@@ -10,8 +9,6 @@ import "./Review.css"
 export const ReviewList = () => {
     const { reviews, getReviews, displayReviews, setDisplayReviews, reviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
-
-    const scrollPoint = useRef()
 
     useEffect(() => {
         getReviews()
@@ -34,7 +31,6 @@ export const ReviewList = () => {
     const handleAddReview = () => {
         if (sessionStorage.getItem(userStorageKey)) {
             setDisplayReviewForm(true)
-            scrollPoint.current.scrollIntoView({ behavior: 'smooth' })
         } else {
             window.alert("Please log in to add a review.")
         }
@@ -59,7 +55,7 @@ export const ReviewList = () => {
                     <div className={displayReviewForm ? "" : "hidden"}>
                         <ReviewForm />
                     </div>
-                    <div ref={scrollPoint}></div>
+
                 </div>
             </div>
             <button className="modal-close is-large" aria-label="close" onClick={handleCloseReviewModal}></button>

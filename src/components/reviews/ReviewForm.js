@@ -121,9 +121,11 @@ export const ReviewForm = () => {
     useEffect(() => {
         if (displayReviewForm){
             scrollPoint.current.focus()
+        } else {
+            handleCancelReview()
         }
     }, [displayReviewForm])
-    
+
     return (
         <form className="reviewForm" onSubmit={handleSaveReview}>
             <h2 className="title is-4 has-text-centered">{formTitle()}</h2>

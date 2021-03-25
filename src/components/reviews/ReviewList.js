@@ -38,7 +38,9 @@ export const ReviewList = () => {
 
     const handleCloseReviewModal = () => {
         setDisplayReviews(false)
+        setDisplayReviewForm(false)
     }
+
 
     return (
         <div className={displayReviews ? "modal is-active" : "modal"}>

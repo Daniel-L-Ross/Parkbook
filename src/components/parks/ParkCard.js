@@ -6,7 +6,7 @@ import { ReviewContext } from "../reviews/ReviewProvider"
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
-    const { setDisplayReviews, setReviewPark } = useContext(ReviewContext)
+    const { setReviewPark } = useContext(ReviewContext)
 
     // Nested address data was returned as a JSON object
     const address = JSON.parse(park.mapped_location.human_address)
@@ -60,7 +60,6 @@ export const ParkCard = ({ park }) => {
 
     const handleReviewsLink = () => {
         setReviewPark(park)
-        setDisplayReviews(true)
     }
 
     // controls state variable to display or hide park details info

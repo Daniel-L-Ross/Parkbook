@@ -1,11 +1,19 @@
 # Parkbook
 
-Search parks in Nashville, Tennessee for specific features, save parks you like, and leave reviews on parks.  
-[![NPM Version][npm-image]][npm-url]
-
+>Search parks in Nashville, Tennessee for specific features, save parks you like, and leave reviews on parks.  
+  
 ## Motivation
 
-This app was built to provide a simple and intuitive way to discover what nearby parks have to offer. During the pandemic I found mself spending more time outside
+This app was built to provide a simple and intuitive way to discover what nearby parks have to offer. During the pandemic I found mself spending more time outside to socially distance with friends. I was a aware of many of the parks in Nashville, but did not know of a simple way to search through every park all at once. In March 2021 I needed a front-end capstone project for a coding bootcamp. I searched for inspiration and found a dataset of Nashville's parks, which lead me to the idea for this app.
+  
+## Installation
+Make a copy of database.json.example  
+Run a [json-server](https://www.npmjs.com/package/json-server)  from the api directory
+``` 
+npm install
+npm start
+```
+
 
 ## Screenshots
 
@@ -16,91 +24,16 @@ This app was built to provide a simple and intuitive way to discover what nearby
 ### Leave Reviews
 ![reviews](./src/images/reviews.gif)
 
-## Tech
-This app uses json-server to create a fake REST API
+## Tech 
+React, Javascript, CSS, [Bulma](https://bulma.io/), and a touch of [SASS](https://sass-lang.com/)
 
-## Installation
-Make a copy of database.json.example  
-Run a [json-server](https://www.npmjs.com/package/json-server)  from the api
-``` 
-npm install
-npm start
-```
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ## ERD
 ![ERD](./src/images/parkbook_erd.png)
+
+The foundation of this app is a dataset of Nashville's parks. This data is in the public doman and was duplicated from [Data.Nashville.gov](https://data.nashville.gov/Parks/Park-Locations/74d7-b74t)
 
 ## A Note About Authentication
 
 The login and registration code used is fake, completely insecure, and would never be implemented in a professional application. It is a simulation authentication using very simplistic tools, because authentication is not a learning objective of this project.
-
----
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

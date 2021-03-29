@@ -8,9 +8,24 @@ I
 
 ## Screenshots
 
+### Filter Parks by Feature
+![filter](./src/images/filter.gif)
+### Expand Park Detail
+![detail](./src/images/detail.gif)
+### Leave Reviews
+![reviews](./src/images/reviews.gif)
+
 ## Tech
 
 ## Installation
+Make a copy of database.json.example
+Run a [json-server](https://www.npmjs.com/package/json-server)  from the api
+``` 
+npm install
+npm start
+```
+## ERD
+![ERD](./src/images/parkbook_erd.png)
 
 ---
 # Getting Started with Create React App

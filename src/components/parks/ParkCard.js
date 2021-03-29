@@ -74,27 +74,28 @@ export const ParkCard = ({ park }) => {
         <div className={favorited ? "favorite card" : "park card"}>
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
-                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-secondary card-footer-item">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-primary card-footer-item">Favorite</button>}
+                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-primary">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-primary">Favorite</button>}
             </div>
             <div className="card-content">
 
                 <p>Park Size: {park.acres} acres</p>
                 <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
-
-                {<button onClick={toggleDetail} className="button is-medum is-primary card-footer-item">{hidden ? "Show Detail" : "Hide Detail"}</button>}
+                <div className="is-flex is-justify-content-center">
+                    {<button onClick={toggleDetail} className="button is-small is-primary card-footer-item">{hidden ? "Show Detail" : "Hide Detail"}</button>}
+                </div>
                 {/* toggle class to set display to hidden */}
                 <div className={hidden ? "hidden" : "park__detail"}>
                     <h4>Features: </h4>
                     <div className="tags">
                         {parkFeatures().map(feature => <span key={feature} className="tag is-rounded is-secondary">{feature}</span>)}
                     </div>
-                    <button className="button is-danger">Hide park</button>
                     <h4>Notes:</h4>
                     <p>{park.notes}</p>
                 </div>
             </div>
             <div className="card-footer">
-                {<button onClick={handleReviewsLink} className="button is-small is-link card-footer-item">Reviews</button>}
+                <button onClick={handleReviewsLink} className="button is-small is-link card-footer-item">Reviews</button>
+                <button className="button is-primary is-small card-footer-item">Hide park</button>
             </div>
         </div>
     )

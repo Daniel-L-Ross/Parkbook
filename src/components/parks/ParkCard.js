@@ -7,6 +7,7 @@ import { ReviewContext } from "../reviews/ReviewProvider"
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
     const { setDisplayReviews, setReviewPark } = useContext(ReviewContext)
+    const [hideWarning, setHideWarning] = useState(false)
 
     // Nested address data was returned as a JSON object
     const address = JSON.parse(park.mapped_location.human_address)
@@ -30,6 +31,10 @@ export const ParkCard = ({ park }) => {
         const favorite = userFavorites.filter(fav => fav.parkId === park.id && fav.userId === currentUserId)
         deleteFavorite(favorite[0].id)
             .then(getUserFavorites)
+    }
+
+    const handleHideParkClick = () => {
+        setHideWarning(true)
     }
 
     let favorited = false
@@ -72,10 +77,17 @@ export const ParkCard = ({ park }) => {
 
     return (
         <div className={favorited ? "favorite card" : "park card"}>
+            <dialog className="dialog" open={hideWarning}>
+                <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
+                <div className="card-footer mt-6">
+                    <button className="button is-primary card-footer-item" onClick={e => setHideWarning(false)}>Cancel</button>
+                    <button className="button is-danger card-footer-item" onClick="">Confirm</button>
+                </div>
+            </dialog>
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
                 {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>}
-                <button className="button is-primary is-small card-footer-item">Hide</button>
+                <button onClick={handleHideParkClick} className="button is-primary is-small card-footer-item">Hide</button>
             </div>
             <div className="card-content">
 

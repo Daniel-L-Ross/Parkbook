@@ -54,7 +54,7 @@ export const ParkCard = ({ park }) => {
             }
         })
 
-        return featureArray
+        return featureArray.sort()
     }
 
 

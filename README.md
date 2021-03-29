@@ -1,6 +1,7 @@
 # Parkbook
 
-Search parks in Nashville, Tennessee for specific features, save parks you like, and leave reviews on parks. 
+Search parks in Nashville, Tennessee for specific features, save parks you like, and leave reviews on parks.  
+[![NPM Version][npm-image]][npm-url]
 
 ## Motivation
 
@@ -19,7 +20,7 @@ This app was built to provide a simple and intuitive way to discover what nearby
 This app uses json-server to create a fake REST API
 
 ## Installation
-Make a copy of database.json.example
+Make a copy of database.json.example  
 Run a [json-server](https://www.npmjs.com/package/json-server)  from the api
 ``` 
 npm install

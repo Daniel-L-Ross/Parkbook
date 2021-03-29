@@ -1,10 +1,10 @@
 # Parkbook
 
-Search parks in Nashville TN for specific features, save parks you like, and leave reviews on parks. 
+Search parks in Nashville, Tennessee for specific features, save parks you like, and leave reviews on parks. 
 
 ## Motivation
 
-I 
+This app was built to provide a simple and intuitive way to discover what nearby parks have to offer. During the pandemic I found mself spending more time outside
 
 ## Screenshots
 
@@ -16,6 +16,7 @@ I
 ![reviews](./src/images/reviews.gif)
 
 ## Tech
+This app uses json-server to create a fake REST API
 
 ## Installation
 Make a copy of database.json.example
@@ -26,6 +27,10 @@ npm start
 ```
 ## ERD
 ![ERD](./src/images/parkbook_erd.png)
+
+## A Note About Authentication
+
+The login and registration code used is fake, completely insecure, and would never be implemented in a professional application. It is a simulation authentication using very simplistic tools, because authentication is not a learning objective of this project.
 
 ---
 # Getting Started with Create React App

@@ -1,6 +1,16 @@
 # Parkbook
 
-This project
+Search parks in Nashville TN for specific features, save parks you like, and leave reviews on parks. 
+
+## Motivation
+
+I 
+
+## Screenshots
+
+## Tech
+
+## Installation
 
 ---
 # Getting Started with Create React App

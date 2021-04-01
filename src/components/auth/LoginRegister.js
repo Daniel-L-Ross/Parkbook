@@ -16,7 +16,6 @@ export const LoginRegister = () => {
 
     if (sessionStorage.getItem(userStorageKey)) {
         setDisplayLogin(false)
-        console.log("working")
     }
 
     // render login and register togther for styling purposes

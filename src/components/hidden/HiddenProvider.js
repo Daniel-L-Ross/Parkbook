@@ -37,6 +37,8 @@ export const HiddenProvider = (props) => {
     return (
         <HiddenContext.Provider value={{
             userHidden, getUserHidden, addHidden, deletehidden
-        }}
+        }}>
+            {props.children}
+        </HiddenContext.Provider>
     )
 }

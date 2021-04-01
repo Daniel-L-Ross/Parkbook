@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
 import { userStorageKey } from "../auth/authSettings"
 import { ReviewContext } from "../reviews/ReviewProvider"
+import { HiddenContext } from "../hidden/HiddenProvider"
 
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
+    const { addHidden, getUserHidden } = useContext(HiddenContext)
     const [hideWarning, setHideWarning] = useState(false)
     const { setReviewPark } = useContext(ReviewContext)
 
@@ -34,7 +36,21 @@ export const ParkCard = ({ park }) => {
     }
 
     const handleHideParkClick = () => {
-        setHideWarning(true)
+        if (sessionStorage.getItem(userStorageKey)) {
+            setHideWarning(true)
+        } else {
+            window.alert("Log in to hide a park from search results")
+        }
+    }
+
+    const handleAddHidden = () => {
+        const newHidden = {
+            parkId: park.id,
+            userId: currentUserId
+        }
+        addHidden(newHidden)
+        .then(getUserHidden)
+        setHideWarning(false)
     }
 
     let favorited = false
@@ -80,7 +96,7 @@ export const ParkCard = ({ park }) => {
                 <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
                 <div className="card-footer mt-6">
                     <button className="button is-primary card-footer-item" onClick={e => setHideWarning(false)}>Cancel</button>
-                    <button className="button is-danger card-footer-item" onClick="">Confirm</button>
+                    <button className="button is-danger card-footer-item" onClick={handleAddHidden}>Confirm</button>
                 </div>
             </dialog>
             <div className="card-header">

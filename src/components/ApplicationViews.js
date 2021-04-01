@@ -7,19 +7,22 @@ import { ParkList } from "./parks/ParkList"
 import { ParkSearch } from "./parks/ParkSearch"
 import { UserProfile } from "./users/UserProfile"
 import { UserProvider } from "./users/UserProvider"
+import { HiddenProvider } from "./hidden/HiddenProvider"
 
 
 export const ApplicationViews = () => {
     return (
         <>
             <FavoriteProvider>
-                <ParkProvider>
-                    <Route exact path="/">
-                        <ParkSearch />
-                        <ParkList />
-                    </Route>
+                <HiddenProvider>
+                    <ParkProvider>
+                        <Route exact path="/">
+                            <ParkSearch />
+                            <ParkList />
+                        </Route>
 
-                </ParkProvider>
+                    </ParkProvider>
+                </HiddenProvider>
 
                 <Route exact path="/favorites">
                     <FavoritesList />
@@ -27,9 +30,11 @@ export const ApplicationViews = () => {
             </FavoriteProvider>
 
             <UserProvider>
-                <Route path="/user">
-                    <UserProfile />
-                </Route>
+                <HiddenProvider>
+                    <Route path="/user">
+                        <UserProfile />
+                    </Route>
+                </HiddenProvider>
             </UserProvider>
         </>
     )

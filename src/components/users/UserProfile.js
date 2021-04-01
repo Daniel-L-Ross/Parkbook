@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserProvider"
 import { HiddenContext } from "../hidden/HiddenProvider"
+import { HiddenPark } from "../hidden/HiddenPark"
 import "./User.css"
 
 export const UserProfile = () => {
     const { getUserById, user } = useContext(UserContext)
     const { getUserHidden, userHidden } = useContext(HiddenContext)
+    const [ parkDisplay, setParkDisplay ] = useState(false)
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
@@ -14,8 +16,8 @@ export const UserProfile = () => {
             .then(getUserHidden)
     }, [])
 
-    const handleRemoveHidden = () => {
-
+    const toggleDisplay = () => {
+        setParkDisplay(!parkDisplay)
     }
 
     return (
@@ -31,14 +33,9 @@ export const UserProfile = () => {
                     <div>Your email: {user.email}</div>
                 </div>
                     <h4 className="title is-5">Hidden Parks List: </h4>
-                    <button className="button is-primary">Display</button>
-                <div className="card parks">
-                        {userHidden.map(hidden => {
-                            return <div key={hidden.id} className=" park">
-                                <h3>{hidden.park.park_name}</h3>
-                                <button className="button">Restore Park</button>
-                            </div>
-                        })}
+                    <button className="button is-primary" onClick={toggleDisplay}>{parkDisplay ? "Hide" : "Display"}</button>
+                <div className={parkDisplay ? "parks" : "hidden"}>
+                        {userHidden.map(hidden => <HiddenPark key={hidden.id} hidden={hidden}/>)}
                 </div>
             </div>
         </div>

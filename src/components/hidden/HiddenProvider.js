@@ -28,15 +28,15 @@ export const HiddenProvider = (props) => {
         })
     }
 
-    const deletehidden = hiddenId => {
-        return fetch(`http://localhost:8088/favorites/${hiddenId}`, {
+    const deleteHidden = hiddenId => {
+        return fetch(`http://localhost:8088/hidden/${hiddenId}`, {
             method: "DELETE"
         })
     }
 
     return (
         <HiddenContext.Provider value={{
-            userHidden, getUserHidden, addHidden, deletehidden
+            userHidden, getUserHidden, addHidden, deleteHidden
         }}>
             {props.children}
         </HiddenContext.Provider>

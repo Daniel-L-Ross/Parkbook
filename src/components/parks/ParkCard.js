@@ -92,6 +92,7 @@ export const ParkCard = ({ park }) => {
 
     return (
         <div className={favorited ? "favorite card" : "park card"}>
+
             <dialog className="dialog" open={hideWarning}>
                 <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
                 <div className="card-footer mt-6">
@@ -99,6 +100,7 @@ export const ParkCard = ({ park }) => {
                     <button className="button is-danger card-footer-item" onClick={handleAddHidden}>Confirm</button>
                 </div>
             </dialog>
+            
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
                 {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>}

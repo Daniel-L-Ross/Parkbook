@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserProvider"
 import { HiddenContext } from "../hidden/HiddenProvider"
-import { ParkCard } from "../parks/ParkCard"
+import "./User.css"
 
 export const UserProfile = () => {
     const { getUserById, user } = useContext(UserContext)
@@ -11,8 +11,12 @@ export const UserProfile = () => {
 
     useEffect(() => {
         getUserById(currentUserId)
-        .then(getUserHidden)
+            .then(getUserHidden)
     }, [])
+
+    const handleRemoveHidden = () => {
+
+    }
 
     return (
         <div className="column">
@@ -26,13 +30,15 @@ export const UserProfile = () => {
                     <p>Hi, {user.name}.</p>
                     <div>Your email: {user.email}</div>
                 </div>
-                <div>
                     <h4 className="title is-5">Hidden Parks List: </h4>
-                    <ul>
+                    <button className="button is-primary">Display</button>
+                <div className="card parks">
                         {userHidden.map(hidden => {
-                            return <li id={hidden.id}>{hidden.park.park_name}</li>
+                            return <div key={hidden.id} className=" park">
+                                <h3>{hidden.park.park_name}</h3>
+                                <button className="button">Restore Park</button>
+                            </div>
                         })}
-                        </ul>
                 </div>
             </div>
         </div>

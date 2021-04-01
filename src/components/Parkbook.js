@@ -18,10 +18,10 @@ export const Parkbook = () => {
                         <ApplicationViews />
                     </div>
 
-                    {/* modal that appears onClick */}
+                    {/* Login/register modal */}
                     <LoginRegister />
 
-                    {/* modal that appears onClick */}
+                    {/* Review modal */}
                     <ReviewList />
                 </ReviewProvider>
             </LoginProvider>

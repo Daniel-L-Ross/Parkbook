@@ -19,6 +19,17 @@ export const ReviewForm = () => {
         edited: false
     })
 
+    useEffect(() =>{
+        setReview({
+            parkId: reviewPark.id,
+            userId: currentUserId,
+            rating: 0,
+            review: "",
+            timestamp: Date.now(),
+            edited: false
+        })
+    }, [reviewPark])
+
     const handleControlledInputChange = event => {
         const newReview = { ...review }
 

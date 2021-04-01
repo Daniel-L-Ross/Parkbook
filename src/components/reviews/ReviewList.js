@@ -7,11 +7,14 @@ import "./Review.css"
 
 
 export const ReviewList = () => {
-    const { reviews, getReviews, setReviews, displayReviews, setDisplayReviews, reviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
+    const { reviews, getReviews, setReviews, displayReviews, setDisplayReviews, reviewPark, setReviewPark, displayReviewForm, setDisplayReviewForm } = useContext(ReviewContext)
     const [filteredReviews, setFiltered] = useState("")
 
     useEffect(() => {
-        getReviews()
+        if (reviewPark.id){
+            getReviews()
+            .then(setDisplayReviews(true))
+        }
     }, [reviewPark])
 
     // whenever reviews changes, get all the reviews for the current park. Handle empty review array. 
@@ -39,6 +42,7 @@ export const ReviewList = () => {
     const handleCloseReviewModal = () => {
         setDisplayReviews(false)
         setDisplayReviewForm(false)
+        setReviewPark({})
     }
 
 

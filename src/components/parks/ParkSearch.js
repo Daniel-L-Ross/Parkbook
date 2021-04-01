@@ -39,6 +39,9 @@ export const ParkSearch = () => {
                     featureArray.push(featureObj)
                 }
             })
+
+            // code for sorting features alphaetically here
+
             setFeatures(featureArray)
         }
     }, [parks])

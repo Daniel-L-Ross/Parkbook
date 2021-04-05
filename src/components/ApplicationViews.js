@@ -22,11 +22,11 @@ export const ApplicationViews = () => {
                         </Route>
 
                     </ParkProvider>
-                </HiddenProvider>
 
-                <Route exact path="/favorites">
-                    <FavoritesList />
-                </Route>
+                    <Route exact path="/favorites">
+                        <FavoritesList />
+                    </Route>
+                </HiddenProvider>
             </FavoriteProvider>
 
             <UserProvider>

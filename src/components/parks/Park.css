@@ -48,3 +48,8 @@
 .search {
  border-right: 1px solid gainsboro;
 }
+
+.dialog {
+  z-index: 1;
+  height: 90%;
+}

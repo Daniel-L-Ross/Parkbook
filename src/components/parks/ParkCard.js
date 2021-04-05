@@ -2,10 +2,13 @@ import React, { useContext, useState } from "react"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
 import { userStorageKey } from "../auth/authSettings"
 import { ReviewContext } from "../reviews/ReviewProvider"
+import { HiddenContext } from "../hidden/HiddenProvider"
 
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
+    const { addHidden, getUserHidden } = useContext(HiddenContext)
+    const [hideWarning, setHideWarning] = useState(false)
     const { setReviewPark } = useContext(ReviewContext)
 
     // Nested address data was returned as a JSON object
@@ -32,6 +35,24 @@ export const ParkCard = ({ park }) => {
             .then(getUserFavorites)
     }
 
+    const handleHideParkClick = () => {
+        if (sessionStorage.getItem(userStorageKey)) {
+            setHideWarning(true)
+        } else {
+            window.alert("Log in to hide a park from search results")
+        }
+    }
+
+    const handleAddHidden = () => {
+        const newHidden = {
+            parkId: park.id,
+            userId: currentUserId
+        }
+        addHidden(newHidden)
+        .then(getUserHidden)
+        setHideWarning(false)
+    }
+
     let favorited = false
 
     const favoriteCheck = userFavorites.find(favorite => favorite.parkId === park.id)
@@ -54,7 +75,7 @@ export const ParkCard = ({ park }) => {
             }
         })
 
-        return featureArray
+        return featureArray.sort()
     }
 
 
@@ -71,14 +92,26 @@ export const ParkCard = ({ park }) => {
 
     return (
         <div className={favorited ? "favorite card" : "park card"}>
+
+            <dialog className="dialog" open={hideWarning}>
+                <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
+                <div className="card-footer mt-6">
+                    <button className="button is-primary card-footer-item" onClick={e => setHideWarning(false)}>Cancel</button>
+                    <button className="button is-danger card-footer-item" onClick={handleAddHidden}>Confirm</button>
+                </div>
+            </dialog>
+            
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
+                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>}
+                <button onClick={handleHideParkClick} className="button is-primary is-small card-footer-item">Hide</button>
             </div>
             <div className="card-content">
 
                 <p>Park Size: {park.acres} acres</p>
                 <div>Address: {address.address} {address.city}, {address.state} {address.zip} </div>
-
+                <div className="is-flex is-justify-content-center">
+                </div>
                 {/* toggle class to set display to hidden */}
                 <div className={hidden ? "hidden" : "park__detail"}>
                     <h4>Features: </h4>
@@ -90,9 +123,8 @@ export const ParkCard = ({ park }) => {
                 </div>
             </div>
             <div className="card-footer">
-                {<button onClick={handleReviewsLink} className="button is-small is-primary card-footer-item">Reviews</button>}
+                <button onClick={handleReviewsLink} className="button is-small is-link card-footer-item">Reviews</button>
                 {<button onClick={toggleDetail} className="button is-small is-primary card-footer-item">{hidden ? "Show Detail" : "Hide Detail"}</button>}
-                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-primary card-footer-item">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-primary card-footer-item">Favorite</button>}
             </div>
         </div>
     )

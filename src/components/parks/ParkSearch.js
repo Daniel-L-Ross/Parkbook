@@ -23,7 +23,9 @@ export const ParkSearch = () => {
             const templatePark = parks[0]
 
             // get the keys, then iterate over the function
-            Object.keys(templatePark).map(feature => {
+            const parkFeatures = Object.keys(templatePark).sort()
+            
+            parkFeatures.map(feature => {
 
                 // only grab the keys that have values of yes or no, which are "boolean" features
                 if (templatePark[feature] === "Yes" || templatePark[feature] === "No") {

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { ParkContext } from "./ParkProvider"
 import { ParkCard } from "./ParkCard"
 import { FavoriteContext } from "../favorites/FavoritesProvider"
+import { HiddenContext } from "../hidden/HiddenProvider"
 import { LoginContext } from "../auth/LoginProvider"
 import "./Park.css"
 import "../favorites/Favorites.css"
@@ -9,6 +10,7 @@ import "../favorites/Favorites.css"
 
 export const ParkList = () => {
     const { parks, getParks, searchTerms, getParksByFeatures, filteredParks, setFiltered } = useContext(ParkContext)
+    const { getUserHidden, userHidden } = useContext(HiddenContext)
     const { getUserFavorites } = useContext(FavoriteContext)
 
     const { loggedIn } = useContext(LoginContext)
@@ -16,6 +18,7 @@ export const ParkList = () => {
     // get parks whenever loggedIn state is changed
     useEffect(() => {
         getUserFavorites()
+        .then(getUserHidden)
             .then(getParks)
     }, [loggedIn])
 
@@ -42,14 +45,24 @@ export const ParkList = () => {
             setFiltered(parks)
         }
 
-    }, [parks, searchTerms])
+    }, [parks, searchTerms, userHidden])
+
+    const parksToRender = () => {
+        let notHidden = []
+        notHidden = filteredParks.filter(park => {
+            return !userHidden.find(hidden => {
+                return hidden.parkId === park.id
+            })
+        })
+        return notHidden
+    }
 
     return (
         <div className="column">
             {searchTerms.length >= 1 ? <h1 className="title has-text-centered">Search Results</h1> : <h1 className="title has-text-centered">Davidson County Parks</h1>}
             <section className="parks">
                 {
-                    filteredParks.map(park => {
+                    parksToRender().map(park => {
                         return <ParkCard key={park.id} park={park} />
                     })
                 }

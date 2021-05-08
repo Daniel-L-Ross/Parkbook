@@ -48,6 +48,12 @@ export const ParkCard = ({ park }) => {
             parkId: park.id,
             userId: currentUserId
         }
+
+        // if th park is favorited, delete that association 
+        if (favorited) {
+            handleRemoveFavorite()
+        }
+
         addHidden(newHidden)
         .then(getUserHidden)
         setHideWarning(false)
@@ -112,6 +118,18 @@ export const ParkCard = ({ park }) => {
         }
     }
 
+    const favoriteButton = () => {
+        if (hiddenPark) {
+            return ""
+        } else {
+            if (favorited) {
+                return <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> 
+            } else {
+                return <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>
+            }
+        }
+    }
+
     return (
         <div className={favorited ? "favorite card" : "park card"}>
 
@@ -125,7 +143,7 @@ export const ParkCard = ({ park }) => {
             
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
-                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>}
+                {favoriteButton()}
                 <button onClick={handleHideParkClick} className="button is-primary is-small card-footer-item">{hiddenPark ? "Restore" : "Hide"}</button>
             </div>
             <div className="card-content">

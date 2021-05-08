@@ -11,7 +11,7 @@ export const ParkCard = ({ park }) => {
     const [hideWarning, setHideWarning] = useState(false)
     const { setReviewPark } = useContext(ReviewContext)
 
-    // Nested address data was returned as a JSON object
+    // Nested address data is JSON object. Convert to javascript object.
     const address = JSON.parse(park.mapped_location.human_address)
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)

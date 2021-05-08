@@ -11,7 +11,6 @@ export const FavoritesList = () => {
     }, [])
 
     return (
-        // render all favorited parks for current user at the favorites page
         <section className="column">
             <h1 className="title is-2">Your favorites: </h1>
             <section className="favorites">

@@ -28,7 +28,6 @@ export const ApplicationViews = () => {
                         <FavoritesList />
                     </Route>
 
-                </FavoriteProvider>
                 <UserProvider>
 
                     <Route path="/user">
@@ -36,6 +35,7 @@ export const ApplicationViews = () => {
                     </Route>
 
                 </UserProvider>
+                </FavoriteProvider>
             </HiddenProvider>
 
         </>

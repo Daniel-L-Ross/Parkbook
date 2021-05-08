@@ -7,7 +7,7 @@ import { HiddenContext } from "../hidden/HiddenProvider"
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
-    const { addHidden, getUserHidden } = useContext(HiddenContext)
+    const { addHidden, getUserHidden, userHidden } = useContext(HiddenContext)
     const [hideWarning, setHideWarning] = useState(false)
     const { setReviewPark } = useContext(ReviewContext)
 
@@ -16,7 +16,7 @@ export const ParkCard = ({ park }) => {
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
-    const handleAddFavorite = event => {
+    const handleAddFavorite = () => {
         if (sessionStorage.getItem(userStorageKey)) {
             const newFavorite = {
                 parkId: park.id,
@@ -29,7 +29,7 @@ export const ParkCard = ({ park }) => {
         }
     }
 
-    const handleRemoveFavorite = event => {
+    const handleRemoveFavorite = () => {
         const favorite = userFavorites.filter(fav => fav.parkId === park.id && fav.userId === currentUserId)
         deleteFavorite(favorite[0].id)
             .then(getUserFavorites)
@@ -59,6 +59,14 @@ export const ParkCard = ({ park }) => {
 
     if (favoriteCheck !== undefined) {
         favorited = true
+    }
+
+    let hiddenPark = false
+
+    const hiddenParkCheck = userHidden.find(currentPark => currentPark.parkId === park.id)
+
+    if (hiddenParkCheck !== undefined) {
+        hiddenPark = true
     }
 
     const parkFeatures = () => {

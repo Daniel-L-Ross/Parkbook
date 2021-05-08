@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserProvider"
 import { HiddenContext } from "../hidden/HiddenProvider"
 import { HiddenPark } from "../hidden/HiddenPark"
+import { ParkCard } from "../parks/ParkCard"
+
 import "./User.css"
 
 export const UserProfile = () => {
@@ -35,7 +37,7 @@ export const UserProfile = () => {
                     <h4 className="title is-5">Hidden Parks List: </h4>
                     <button className="button is-primary" onClick={toggleDisplay}>{parkDisplay ? "Hide" : "Display"}</button>
                 <div className={parkDisplay ? "parks" : "hidden"}>
-                        {userHidden.map(hidden => <HiddenPark key={hidden.id} hidden={hidden}/>)}
+                        {userHidden.map(hidden => <ParkCard key={hidden.id} park={hidden.park}/>)}
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ import { HiddenContext } from "../hidden/HiddenProvider"
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
-    const { addHidden, getUserHidden, userHidden } = useContext(HiddenContext)
+    const { addHidden, getUserHidden, userHidden, deleteHidden } = useContext(HiddenContext)
     const [hideWarning, setHideWarning] = useState(false)
     const { setReviewPark } = useContext(ReviewContext)
 
@@ -53,6 +53,12 @@ export const ParkCard = ({ park }) => {
         setHideWarning(false)
     }
 
+    const restoreHidden = () => {
+        const hiddenParkCheck = userHidden.find(currentHidden => currentHidden.parkId === park.id)
+        deleteHidden(hiddenParkCheck.id)
+        .then(getUserHidden)
+    }
+
     let favorited = false
 
     const favoriteCheck = userFavorites.find(favorite => favorite.parkId === park.id)
@@ -63,7 +69,7 @@ export const ParkCard = ({ park }) => {
 
     let hiddenPark = false
 
-    const hiddenParkCheck = userHidden.find(currentPark => currentPark.parkId === park.id)
+    const hiddenParkCheck = userHidden.find(currentHidden => currentHidden.parkId === park.id)
 
     if (hiddenParkCheck !== undefined) {
         hiddenPark = true
@@ -98,21 +104,29 @@ export const ParkCard = ({ park }) => {
         setHidden(!hidden)
     }
 
+    const dialogMessage = () => {
+        if (hiddenPark) {
+            return <div>Do you want to restore <b>{park.park_name}</b> to appear in searches?</div>
+        } else {
+            return <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
+        }
+    }
+
     return (
         <div className={favorited ? "favorite card" : "park card"}>
 
             <dialog className="dialog" open={hideWarning}>
-                <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
+                {dialogMessage()}
                 <div className="card-footer mt-6">
                     <button className="button is-primary card-footer-item" onClick={e => setHideWarning(false)}>Cancel</button>
-                    <button className="button is-danger card-footer-item" onClick={handleAddHidden}>Confirm</button>
+                    <button className="button is-danger card-footer-item" onClick={hiddenPark ? restoreHidden : handleAddHidden}>Confirm</button>
                 </div>
             </dialog>
             
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
                 {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>}
-                <button onClick={handleHideParkClick} className="button is-primary is-small card-footer-item">Hide</button>
+                <button onClick={handleHideParkClick} className="button is-primary is-small card-footer-item">{hiddenPark ? "Restore" : "Hide"}</button>
             </div>
             <div className="card-content">
 

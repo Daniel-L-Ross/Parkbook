@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react"
+import { authApi } from "../auth/authSettings"
 
 export const ReviewContext = createContext()
 
@@ -11,18 +12,18 @@ export const ReviewProvider = props => {
 
 
     const getReviews = () => {
-        return fetch(`http://localhost:8088/reviews/?_expand=user`)
+        return fetch(`${authApi.localApiBaseUrl}/reviews/?_expand=user`)
             .then(res => res.json())
             .then(setReviews)
     }
 
     const getReviewById = reviewId => {
-        return fetch(`http://localhost:8088/reviews/${reviewId}`)
+        return fetch(`${authApi.localApiBaseUrl}/reviews/${reviewId}`)
             .then(res => res.json())
     }
 
     const addReview = reviewObj => {
-        return fetch("http://localhost:8088/reviews", {
+        return fetch(`${authApi.localApiBaseUrl}/reviews`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -33,7 +34,7 @@ export const ReviewProvider = props => {
     }
 
     const updateReview = reviewObj => {
-        return fetch(`http://localhost:8088/reviews/${reviewObj.id}`, {
+        return fetch(`${authApi.localApiBaseUrl}/reviews/${reviewObj.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -44,7 +45,7 @@ export const ReviewProvider = props => {
     }
 
     const deleteReview = reviewId => {
-        return fetch(`http://localhost:8088/reviews/${reviewId}`, {
+        return fetch(`${authApi.localApiBaseUrl}/reviews/${reviewId}`, {
             method: "DELETE"
         })
         .then(getReviews)

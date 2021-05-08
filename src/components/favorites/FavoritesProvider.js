@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react"
-import { userStorageKey } from "../auth/authSettings"
+import { userStorageKey, authApi } from "../auth/authSettings"
 
 export const FavoriteContext = createContext()
 
@@ -9,7 +9,7 @@ export const FavoriteProvider = (props) => {
 
     // get favorites by userId. Expand parks. 
     const getUserFavorites = () => {
-            return fetch(`http://localhost:8088/favorites/?userId=${sessionStorage.getItem(userStorageKey)}&_expand=park`)
+            return fetch(`${authApi.localApiBaseUrl}/favorites/?userId=${sessionStorage.getItem(userStorageKey)}&_expand=park`)
             .then(res => res.json())
             .then((favorites) => {
             if (sessionStorage.getItem(userStorageKey)) {
@@ -21,7 +21,7 @@ export const FavoriteProvider = (props) => {
     }
 
     const addFavorite = newFavorite => {
-        return fetch("http://localhost:8088/favorites", {
+        return fetch(`${authApi.localApiBaseUrl}/favorites`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export const FavoriteProvider = (props) => {
     }
 
     const deleteFavorite = favoriteId => {
-        return fetch(`http://localhost:8088/favorites/${favoriteId}`, {
+        return fetch(`${authApi.localApiBaseUrl}/favorites/${favoriteId}`, {
             method: "DELETE"
         })
     }

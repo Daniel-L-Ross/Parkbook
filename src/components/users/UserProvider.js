@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react"
+import { authApi } from "../auth/authSettings"
 
 export const UserContext = createContext()
 
@@ -6,7 +7,7 @@ export const UserProvider = props => {
     const [user, setUser] = useState({})
 
     const getUserById = userId => {
-        return fetch(`http://localhost:8088/users/${userId}`)
+        return fetch(`${authApi.localApiBaseUrl}/users/${userId}`)
             .then(res => res.json())
             .then(setUser)
     }

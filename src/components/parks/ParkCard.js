@@ -7,16 +7,18 @@ import { HiddenContext } from "../hidden/HiddenProvider"
 
 export const ParkCard = ({ park }) => {
     const { userFavorites, getUserFavorites, addFavorite, deleteFavorite } = useContext(FavoriteContext)
-    const { addHidden, getUserHidden } = useContext(HiddenContext)
+    const { addHidden, getUserHidden, userHidden, deleteHidden } = useContext(HiddenContext)
     const [hideWarning, setHideWarning] = useState(false)
     const { setReviewPark } = useContext(ReviewContext)
+    // state variable to display or hide park details 
+    const [hidden, setHidden] = useState(true)
 
-    // Nested address data was returned as a JSON object
+    // Nested address data is JSON object. Convert to javascript object.
     const address = JSON.parse(park.mapped_location.human_address)
 
     const currentUserId = parseInt(sessionStorage.parkbook_user_id)
 
-    const handleAddFavorite = event => {
+    const handleAddFavorite = () => {
         if (sessionStorage.getItem(userStorageKey)) {
             const newFavorite = {
                 parkId: park.id,
@@ -29,7 +31,7 @@ export const ParkCard = ({ park }) => {
         }
     }
 
-    const handleRemoveFavorite = event => {
+    const handleRemoveFavorite = () => {
         const favorite = userFavorites.filter(fav => fav.parkId === park.id && fav.userId === currentUserId)
         deleteFavorite(favorite[0].id)
             .then(getUserFavorites)
@@ -48,8 +50,21 @@ export const ParkCard = ({ park }) => {
             parkId: park.id,
             userId: currentUserId
         }
+
+        // if th park is favorited, delete that association 
+        if (favorited) {
+            handleRemoveFavorite()
+        }
+
         addHidden(newHidden)
-        .then(getUserHidden)
+            .then(getUserHidden)
+        setHideWarning(false)
+    }
+
+    const restoreHidden = () => {
+        const hiddenParkCheck = userHidden.find(currentHidden => currentHidden.parkId === park.id)
+        deleteHidden(hiddenParkCheck.id)
+            .then(getUserHidden)
         setHideWarning(false)
     }
 
@@ -59,6 +74,14 @@ export const ParkCard = ({ park }) => {
 
     if (favoriteCheck !== undefined) {
         favorited = true
+    }
+
+    let hiddenPark = false
+
+    const hiddenParkCheck = userHidden.find(currentHidden => currentHidden.parkId === park.id)
+
+    if (hiddenParkCheck !== undefined) {
+        hiddenPark = true
     }
 
     const parkFeatures = () => {
@@ -78,33 +101,49 @@ export const ParkCard = ({ park }) => {
         return featureArray.sort()
     }
 
+    const toggleDetail = () => {
+        setHidden(!hidden)
+    }
 
     const handleReviewsLink = () => {
         setReviewPark(park)
     }
 
-    // controls state variable to display or hide park details info
-    const [hidden, setHidden] = useState(true)
+    const dialogMessage = () => {
+        if (hiddenPark) {
+            return <div>Do you want to restore <b>{park.park_name}</b> to appear in searches?</div>
+        } else {
+            return <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
+        }
+    }
 
-    const toggleDetail = () => {
-        setHidden(!hidden)
+    const favoriteButton = () => {
+        if (hiddenPark) {
+            return ""
+        } else {
+            if (favorited) {
+                return <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button>
+            } else {
+                return <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>
+            }
+        }
     }
 
     return (
         <div className={favorited ? "favorite card" : "park card"}>
 
             <dialog className="dialog" open={hideWarning}>
-                <div>Do you want to hide <b>{park.park_name}</b> from all future searches? You can review your "hidden" list in your profile page.</div>
+                {dialogMessage()}
                 <div className="card-footer mt-6">
                     <button className="button is-primary card-footer-item" onClick={e => setHideWarning(false)}>Cancel</button>
-                    <button className="button is-danger card-footer-item" onClick={handleAddHidden}>Confirm</button>
+                    <button className="button is-danger card-footer-item" onClick={hiddenPark ? restoreHidden : handleAddHidden}>Confirm</button>
                 </div>
             </dialog>
-            
+
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
-                {favorited ? <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> : <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>}
-                <button onClick={handleHideParkClick} className="button is-primary is-small card-footer-item">Hide</button>
+                {favoriteButton()}
+                <button onClick={handleHideParkClick} className="button is-primary is-small card-footer-item">{hiddenPark ? "Restore" : "Hide"}</button>
             </div>
             <div className="card-content">
 

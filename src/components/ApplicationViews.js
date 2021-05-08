@@ -13,9 +13,10 @@ import { HiddenProvider } from "./hidden/HiddenProvider"
 export const ApplicationViews = () => {
     return (
         <>
-            <FavoriteProvider>
-                <HiddenProvider>
+            <HiddenProvider>
+                <FavoriteProvider>
                     <ParkProvider>
+
                         <Route exact path="/">
                             <ParkSearch />
                             <ParkList />
@@ -26,16 +27,17 @@ export const ApplicationViews = () => {
                     <Route exact path="/favorites">
                         <FavoritesList />
                     </Route>
-                </HiddenProvider>
-            </FavoriteProvider>
 
-            <UserProvider>
-                <HiddenProvider>
+                <UserProvider>
+
                     <Route path="/user">
                         <UserProfile />
                     </Route>
-                </HiddenProvider>
-            </UserProvider>
+
+                </UserProvider>
+                </FavoriteProvider>
+            </HiddenProvider>
+
         </>
     )
 }

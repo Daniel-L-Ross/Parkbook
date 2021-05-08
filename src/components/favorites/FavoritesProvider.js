@@ -5,7 +5,6 @@ export const FavoriteContext = createContext()
 
 export const FavoriteProvider = (props) => {
 
-    // handle state of currentUser favorites
     const [userFavorites, setUserFavorites] = useState([])
 
     // get favorites by userId. Expand parks. 

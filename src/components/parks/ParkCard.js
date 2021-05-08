@@ -10,6 +10,8 @@ export const ParkCard = ({ park }) => {
     const { addHidden, getUserHidden, userHidden, deleteHidden } = useContext(HiddenContext)
     const [hideWarning, setHideWarning] = useState(false)
     const { setReviewPark } = useContext(ReviewContext)
+    // state variable to display or hide park details 
+    const [hidden, setHidden] = useState(true)
 
     // Nested address data is JSON object. Convert to javascript object.
     const address = JSON.parse(park.mapped_location.human_address)
@@ -55,14 +57,15 @@ export const ParkCard = ({ park }) => {
         }
 
         addHidden(newHidden)
-        .then(getUserHidden)
+            .then(getUserHidden)
         setHideWarning(false)
     }
 
     const restoreHidden = () => {
         const hiddenParkCheck = userHidden.find(currentHidden => currentHidden.parkId === park.id)
         deleteHidden(hiddenParkCheck.id)
-        .then(getUserHidden)
+            .then(getUserHidden)
+        setHideWarning(false)
     }
 
     let favorited = false
@@ -98,16 +101,12 @@ export const ParkCard = ({ park }) => {
         return featureArray.sort()
     }
 
+    const toggleDetail = () => {
+        setHidden(!hidden)
+    }
 
     const handleReviewsLink = () => {
         setReviewPark(park)
-    }
-
-    // controls state variable to display or hide park details info
-    const [hidden, setHidden] = useState(true)
-
-    const toggleDetail = () => {
-        setHidden(!hidden)
     }
 
     const dialogMessage = () => {
@@ -123,7 +122,7 @@ export const ParkCard = ({ park }) => {
             return ""
         } else {
             if (favorited) {
-                return <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button> 
+                return <button onClick={handleRemoveFavorite} className="button is-small is-link">Unfavorite</button>
             } else {
                 return <button onClick={handleAddFavorite} className="button is-small is-link">Favorite</button>
             }
@@ -140,7 +139,7 @@ export const ParkCard = ({ park }) => {
                     <button className="button is-danger card-footer-item" onClick={hiddenPark ? restoreHidden : handleAddHidden}>Confirm</button>
                 </div>
             </dialog>
-            
+
             <div className="card-header">
                 <h3 className="card-header-title">{park.park_name}</h3>
                 {favoriteButton()}

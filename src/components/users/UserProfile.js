@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { UserContext } from "./UserProvider"
 import { HiddenContext } from "../hidden/HiddenProvider"
-import { HiddenPark } from "../hidden/HiddenPark"
 import { ParkCard } from "../parks/ParkCard"
 
 import "./User.css"

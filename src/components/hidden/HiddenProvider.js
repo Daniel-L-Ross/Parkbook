@@ -1,5 +1,6 @@
 import React, { useState, createContext } from "react"
-import { userStorageKey } from "../auth/authSettings"
+import { userStorageKey, authApi } from "../auth/authSettings"
+
 
 export const HiddenContext = createContext()
 
@@ -7,7 +8,7 @@ export const HiddenProvider = (props) => {
     const [userHidden, setUserHidden] = useState([])
 
     const getUserHidden = () => {
-        return fetch(`http://localhost:8088/hidden/?userId=${sessionStorage.getItem(userStorageKey)}&_expand=park`)
+        return fetch(`${authApi.localApiBaseUrl}/hidden/?userId=${sessionStorage.getItem(userStorageKey)}&_expand=park`)
             .then(res => res.json())
             .then((hidden) => {
             if (sessionStorage.getItem(userStorageKey)) {
@@ -19,7 +20,7 @@ export const HiddenProvider = (props) => {
     }
 
     const addHidden = newHidden => {
-        return fetch("http://localhost:8088/hidden", {
+        return fetch(`${authApi.localApiBaseUrl}/hidden`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,7 +30,7 @@ export const HiddenProvider = (props) => {
     }
 
     const deleteHidden = hiddenId => {
-        return fetch(`http://localhost:8088/hidden/${hiddenId}`, {
+        return fetch(`${authApi.localApiBaseUrl}/hidden/${hiddenId}`, {
             method: "DELETE"
         })
     }

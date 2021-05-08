@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react"
+import { authApi } from "../auth/authSettings"
 
 export const ParkContext = createContext()
 
@@ -13,13 +14,13 @@ export const ParkProvider = props => {
     const [searchTerms, setSearchTerms] = useState([])
 
     const getParks = () => {
-        return fetch("http://localhost:8088/parks")
+        return fetch(`${authApi.localApiBaseUrl}/parks`)
             .then(res => res.json())
             .then(setParks)
     }
 
     const getParksByFeatures = query => {
-        return fetch(`http://localhost:8088/parks${query}`)
+        return fetch(`${authApi.localApiBaseUrl}/parks${query}`)
             .then(res => res.json())
             .then(setFiltered)
     }

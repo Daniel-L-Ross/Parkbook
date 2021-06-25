@@ -8,7 +8,7 @@ export const ParkProvider = props => {
     const [filteredParks, setFiltered] = useState([])
 
     /*
-        As the common ancestor of parkSearch and parkList, ParkProvider is resposnible for searchterms.
+        As the common ancestor of parkSearch and parkList, ParkProvider is responsible for searchterms.
         Terms set to empty array so multiple parameters can be evaluated simultaneously
     */
     const [searchTerms, setSearchTerms] = useState([])

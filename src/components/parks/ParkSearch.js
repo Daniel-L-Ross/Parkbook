@@ -6,7 +6,7 @@ export const ParkSearch = () => {
     const { setSearchTerms, parks, getParks, searchTerms } = useContext(ParkContext)
     const [features, setFeatures] = useState([])
 
-    // get parks after initial render. setSearchterms to empty on component unmount
+    // get parks after initial render. set Searchterms to empty on component unmount
     useEffect(() => {
         getParks()
         return () => {
